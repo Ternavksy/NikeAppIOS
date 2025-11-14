@@ -11,6 +11,8 @@
 		6A042CD22EC1EE9A00B5C6F6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A042CD12EC1EE9A00B5C6F6 /* ContentView.swift */; };
 		6A042CD42EC1EE9C00B5C6F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A042CD32EC1EE9C00B5C6F6 /* Assets.xcassets */; };
 		6A042CD72EC1EE9C00B5C6F6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A042CD62EC1EE9C00B5C6F6 /* Preview Assets.xcassets */; };
+		6A4A3C322EC5E1A8001585F9 /* Splash_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4A3C312EC5E1A8001585F9 /* Splash_Screen.swift */; };
+		6AF35B1A2EC72E79001EBE15 /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF35B192EC72E79001EBE15 /* SafariWebView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,9 @@
 		6A042CD12EC1EE9A00B5C6F6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6A042CD32EC1EE9C00B5C6F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6A042CD62EC1EE9C00B5C6F6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6A4A3C312EC5E1A8001585F9 /* Splash_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Splash_Screen.swift; sourceTree = "<group>"; };
+		6AF35B192EC72E79001EBE15 /* SafariWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebView.swift; sourceTree = "<group>"; };
+		6AF35B1C2EC73707001EBE15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +40,7 @@
 		6A042CC32EC1EE9900B5C6F6 = {
 			isa = PBXGroup;
 			children = (
+				6AF35B1C2EC73707001EBE15 /* Info.plist */,
 				6A042CCE2EC1EE9A00B5C6F6 /* NikeAppIOS */,
 				6A042CCD2EC1EE9A00B5C6F6 /* Products */,
 			);
@@ -51,8 +57,10 @@
 		6A042CCE2EC1EE9A00B5C6F6 /* NikeAppIOS */ = {
 			isa = PBXGroup;
 			children = (
+				6AF35B182EC72E6C001EBE15 /* WebView */,
+				6A4A3C302EC5E18F001585F9 /* Splash_Screen */,
 				6A042CCF2EC1EE9A00B5C6F6 /* NikeAppIOSApp.swift */,
-				6A042CD12EC1EE9A00B5C6F6 /* ContentView.swift */,
+				6A4A3C272EC5CA83001585F9 /* Second_Screen */,
 				6A042CD32EC1EE9C00B5C6F6 /* Assets.xcassets */,
 				6A042CD52EC1EE9C00B5C6F6 /* Preview Content */,
 			);
@@ -65,6 +73,30 @@
 				6A042CD62EC1EE9C00B5C6F6 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6A4A3C272EC5CA83001585F9 /* Second_Screen */ = {
+			isa = PBXGroup;
+			children = (
+				6A042CD12EC1EE9A00B5C6F6 /* ContentView.swift */,
+			);
+			path = Second_Screen;
+			sourceTree = "<group>";
+		};
+		6A4A3C302EC5E18F001585F9 /* Splash_Screen */ = {
+			isa = PBXGroup;
+			children = (
+				6A4A3C312EC5E1A8001585F9 /* Splash_Screen.swift */,
+			);
+			path = Splash_Screen;
+			sourceTree = "<group>";
+		};
+		6AF35B182EC72E6C001EBE15 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				6AF35B192EC72E79001EBE15 /* SafariWebView.swift */,
+			);
+			path = WebView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +170,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A042CD22EC1EE9A00B5C6F6 /* ContentView.swift in Sources */,
+				6AF35B1A2EC72E79001EBE15 /* SafariWebView.swift in Sources */,
+				6A4A3C322EC5E1A8001585F9 /* Splash_Screen.swift in Sources */,
 				6A042CD02EC1EE9A00B5C6F6 /* NikeAppIOSApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
