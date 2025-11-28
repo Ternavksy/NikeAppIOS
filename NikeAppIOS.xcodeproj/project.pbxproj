@@ -9,20 +9,36 @@
 /* Begin PBXBuildFile section */
 		6A042CD02EC1EE9A00B5C6F6 /* NikeAppIOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A042CCF2EC1EE9A00B5C6F6 /* NikeAppIOSApp.swift */; };
 		6A042CD22EC1EE9A00B5C6F6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A042CD12EC1EE9A00B5C6F6 /* ContentView.swift */; };
-		6A042CD42EC1EE9C00B5C6F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A042CD32EC1EE9C00B5C6F6 /* Assets.xcassets */; };
+		6A042CD42EC1EE9C00B5C6F6 /* picture.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A042CD32EC1EE9C00B5C6F6 /* picture.xcassets */; };
 		6A042CD72EC1EE9C00B5C6F6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A042CD62EC1EE9C00B5C6F6 /* Preview Assets.xcassets */; };
+		6A17AD922ECB25B400C2DD5D /* Third_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A17AD912ECB25B400C2DD5D /* Third_Screen.swift */; };
+		6A17AD972ECB315000C2DD5D /* Main_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A17AD962ECB315000C2DD5D /* Main_Screen.swift */; };
+		6A17AD9B2ECB326A00C2DD5D /* Ronaldo.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 6A17AD9A2ECB326A00C2DD5D /* Ronaldo.jpeg */; };
+		6A1D53C62ECF27C6004F4548 /* Eight_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1D53C52ECF27C6004F4548 /* Eight_Screen.swift */; };
+		6A39AB1A2ECE67AC006CBC1F /* Shop_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A39AB192ECE67AC006CBC1F /* Shop_Screen.swift */; };
 		6A4A3C322EC5E1A8001585F9 /* Splash_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4A3C312EC5E1A8001585F9 /* Splash_Screen.swift */; };
-		6AF35B1A2EC72E79001EBE15 /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF35B192EC72E79001EBE15 /* SafariWebView.swift */; };
+		6A4FCFD32ED9BEB900A390B4 /* Profile_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4FCFD22ED9BEB900A390B4 /* Profile_Screen.swift */; };
+		6A83A1902ECFC1E000D1928F /* Nine_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A83A18F2ECFC1E000D1928F /* Nine_Screen.swift */; };
+		6A9048022ECC7A550094738F /* Fourth_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9048012ECC7A550094738F /* Fourth_Screen.swift */; };
+		6A9048052ECC83F00094738F /* Fifth_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9048042ECC83F00094738F /* Fifth_Screen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6A042CCC2EC1EE9A00B5C6F6 /* NikeAppIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NikeAppIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A042CCF2EC1EE9A00B5C6F6 /* NikeAppIOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NikeAppIOSApp.swift; sourceTree = "<group>"; };
 		6A042CD12EC1EE9A00B5C6F6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		6A042CD32EC1EE9C00B5C6F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6A042CD32EC1EE9C00B5C6F6 /* picture.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = picture.xcassets; sourceTree = "<group>"; };
 		6A042CD62EC1EE9C00B5C6F6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6A17AD912ECB25B400C2DD5D /* Third_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Third_Screen.swift; sourceTree = "<group>"; };
+		6A17AD962ECB315000C2DD5D /* Main_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main_Screen.swift; sourceTree = "<group>"; };
+		6A17AD9A2ECB326A00C2DD5D /* Ronaldo.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Ronaldo.jpeg; path = ../../../../../Downloads/Ronaldo.jpeg; sourceTree = "<group>"; };
+		6A1D53C52ECF27C6004F4548 /* Eight_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Eight_Screen.swift; sourceTree = "<group>"; };
+		6A39AB192ECE67AC006CBC1F /* Shop_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop_Screen.swift; sourceTree = "<group>"; };
 		6A4A3C312EC5E1A8001585F9 /* Splash_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Splash_Screen.swift; sourceTree = "<group>"; };
-		6AF35B192EC72E79001EBE15 /* SafariWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebView.swift; sourceTree = "<group>"; };
+		6A4FCFD22ED9BEB900A390B4 /* Profile_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile_Screen.swift; sourceTree = "<group>"; };
+		6A83A18F2ECFC1E000D1928F /* Nine_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nine_Screen.swift; sourceTree = "<group>"; };
+		6A9048012ECC7A550094738F /* Fourth_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fourth_Screen.swift; sourceTree = "<group>"; };
+		6A9048042ECC83F00094738F /* Fifth_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fifth_Screen.swift; sourceTree = "<group>"; };
 		6AF35B1C2EC73707001EBE15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,11 +73,18 @@
 		6A042CCE2EC1EE9A00B5C6F6 /* NikeAppIOS */ = {
 			isa = PBXGroup;
 			children = (
-				6AF35B182EC72E6C001EBE15 /* WebView */,
+				6A4FCFD12ED9BEAD00A390B4 /* Profile_Screen */,
+				6A83A18E2ECFC1C800D1928F /* Nine_Screen */,
+				6A1D53C42ECF27B1004F4548 /* Eight_Screen */,
+				6A39AB172ECE678F006CBC1F /* Shop_Screen */,
+				6A9048032ECC83D20094738F /* Fifth_Screen */,
+				6A9048002ECC7A3D0094738F /* Fourth_Screen */,
+				6A17AD952ECB313100C2DD5D /* Main_Screen */,
+				6A17AD902ECB259C00C2DD5D /* Third_Screen */,
 				6A4A3C302EC5E18F001585F9 /* Splash_Screen */,
 				6A042CCF2EC1EE9A00B5C6F6 /* NikeAppIOSApp.swift */,
 				6A4A3C272EC5CA83001585F9 /* Second_Screen */,
-				6A042CD32EC1EE9C00B5C6F6 /* Assets.xcassets */,
+				6A042CD32EC1EE9C00B5C6F6 /* picture.xcassets */,
 				6A042CD52EC1EE9C00B5C6F6 /* Preview Content */,
 			);
 			path = NikeAppIOS;
@@ -71,8 +94,41 @@
 			isa = PBXGroup;
 			children = (
 				6A042CD62EC1EE9C00B5C6F6 /* Preview Assets.xcassets */,
+				6A17AD9A2ECB326A00C2DD5D /* Ronaldo.jpeg */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6A17AD902ECB259C00C2DD5D /* Third_Screen */ = {
+			isa = PBXGroup;
+			children = (
+				6A17AD912ECB25B400C2DD5D /* Third_Screen.swift */,
+			);
+			path = Third_Screen;
+			sourceTree = "<group>";
+		};
+		6A17AD952ECB313100C2DD5D /* Main_Screen */ = {
+			isa = PBXGroup;
+			children = (
+				6A17AD962ECB315000C2DD5D /* Main_Screen.swift */,
+			);
+			path = Main_Screen;
+			sourceTree = "<group>";
+		};
+		6A1D53C42ECF27B1004F4548 /* Eight_Screen */ = {
+			isa = PBXGroup;
+			children = (
+				6A1D53C52ECF27C6004F4548 /* Eight_Screen.swift */,
+			);
+			path = Eight_Screen;
+			sourceTree = "<group>";
+		};
+		6A39AB172ECE678F006CBC1F /* Shop_Screen */ = {
+			isa = PBXGroup;
+			children = (
+				6A39AB192ECE67AC006CBC1F /* Shop_Screen.swift */,
+			);
+			path = Shop_Screen;
 			sourceTree = "<group>";
 		};
 		6A4A3C272EC5CA83001585F9 /* Second_Screen */ = {
@@ -91,12 +147,36 @@
 			path = Splash_Screen;
 			sourceTree = "<group>";
 		};
-		6AF35B182EC72E6C001EBE15 /* WebView */ = {
+		6A4FCFD12ED9BEAD00A390B4 /* Profile_Screen */ = {
 			isa = PBXGroup;
 			children = (
-				6AF35B192EC72E79001EBE15 /* SafariWebView.swift */,
+				6A4FCFD22ED9BEB900A390B4 /* Profile_Screen.swift */,
 			);
-			path = WebView;
+			path = Profile_Screen;
+			sourceTree = "<group>";
+		};
+		6A83A18E2ECFC1C800D1928F /* Nine_Screen */ = {
+			isa = PBXGroup;
+			children = (
+				6A83A18F2ECFC1E000D1928F /* Nine_Screen.swift */,
+			);
+			path = Nine_Screen;
+			sourceTree = "<group>";
+		};
+		6A9048002ECC7A3D0094738F /* Fourth_Screen */ = {
+			isa = PBXGroup;
+			children = (
+				6A9048012ECC7A550094738F /* Fourth_Screen.swift */,
+			);
+			path = Fourth_Screen;
+			sourceTree = "<group>";
+		};
+		6A9048032ECC83D20094738F /* Fifth_Screen */ = {
+			isa = PBXGroup;
+			children = (
+				6A9048042ECC83F00094738F /* Fifth_Screen.swift */,
+			);
+			path = Fifth_Screen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,7 +238,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A042CD72EC1EE9C00B5C6F6 /* Preview Assets.xcassets in Resources */,
-				6A042CD42EC1EE9C00B5C6F6 /* Assets.xcassets in Resources */,
+				6A042CD42EC1EE9C00B5C6F6 /* picture.xcassets in Resources */,
+				6A17AD9B2ECB326A00C2DD5D /* Ronaldo.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,10 +250,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A17AD972ECB315000C2DD5D /* Main_Screen.swift in Sources */,
+				6A83A1902ECFC1E000D1928F /* Nine_Screen.swift in Sources */,
 				6A042CD22EC1EE9A00B5C6F6 /* ContentView.swift in Sources */,
-				6AF35B1A2EC72E79001EBE15 /* SafariWebView.swift in Sources */,
+				6A4FCFD32ED9BEB900A390B4 /* Profile_Screen.swift in Sources */,
 				6A4A3C322EC5E1A8001585F9 /* Splash_Screen.swift in Sources */,
+				6A9048052ECC83F00094738F /* Fifth_Screen.swift in Sources */,
+				6A39AB1A2ECE67AC006CBC1F /* Shop_Screen.swift in Sources */,
+				6A1D53C62ECF27C6004F4548 /* Eight_Screen.swift in Sources */,
+				6A9048022ECC7A550094738F /* Fourth_Screen.swift in Sources */,
 				6A042CD02EC1EE9A00B5C6F6 /* NikeAppIOSApp.swift in Sources */,
+				6A17AD922ECB25B400C2DD5D /* Third_Screen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

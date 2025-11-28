@@ -1,14 +1,11 @@
 import SwiftUI
-import SafariServices
 
 struct ContentView: View {
 
-    @State private var showSafari = false
-    @State private var safariURL: URL?
+    @State private var showForm = false
 
     var body: some View {
         ZStack {
-            // Фон
             Image("image_3")
                 .resizable()
                 .scaledToFill()
@@ -23,7 +20,7 @@ struct ContentView: View {
 
             VStack {
                 Spacer()
-                
+
                 HStack {
                     Image("nike")
                         .resizable()
@@ -53,7 +50,9 @@ struct ContentView: View {
                 .padding(.bottom, 40)
 
                 HStack(spacing: 16) {
-                    Button(action: openForm) {
+                    Button {
+                        showForm = true
+                    } label: {
                         Text("Join Us")
                             .fontWeight(.semibold)
                             .frame(maxWidth: .infinity)
@@ -63,7 +62,9 @@ struct ContentView: View {
                             .cornerRadius(30)
                     }
 
-                    Button(action: openForm) {
+                    Button {
+                        showForm = true
+                    } label: {
                         Text("Sign In")
                             .fontWeight(.semibold)
                             .frame(maxWidth: .infinity)
@@ -80,29 +81,9 @@ struct ContentView: View {
             }
             .padding(.bottom, 20)
         }
-        .sheet(isPresented: $showSafari) {
-            if let url = safariURL {
-                SafariView(url: url)
-            }
+        .sheet(isPresented: $showForm) {
+            ThirdScreen()
         }
         .navigationBarBackButtonHidden(true)
     }
-
-    func openForm() {
-        if let url = URL(string: "https://www.apple.com") {
-            safariURL = url
-            showSafari = true
-        }
-    }
-}
-
-// Обёртка SFSafariViewController для SwiftUI
-struct SafariView: UIViewControllerRepresentable {
-    let url: URL
-
-    func makeUIViewController(context: Context) -> SFSafariViewController {
-        SFSafariViewController(url: url)
-    }
-
-    func updateUIViewController(_ uiViewController: SFSafariViewController, context: Context) {}
 }
