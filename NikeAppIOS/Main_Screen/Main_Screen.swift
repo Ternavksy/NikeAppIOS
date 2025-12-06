@@ -27,7 +27,8 @@ struct Main_Screen: View {
                     Text("Bag")
                 }
 
-            Text("Profile")
+            // <-- Здесь заменили простой Text на твой экран профиля
+            ProfileTabView()
                 .tabItem {
                     Image(systemName: "person")
                     Text("Profile")
@@ -95,5 +96,6 @@ struct HomeTab: View {
 struct Main_Screen_Previews: PreviewProvider {
     static var previews: some View {
         Main_Screen()
+            .previewDevice("iPhone 14 Pro")
     }
 }
