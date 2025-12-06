@@ -11,6 +11,7 @@
 		6A042CD22EC1EE9A00B5C6F6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A042CD12EC1EE9A00B5C6F6 /* ContentView.swift */; };
 		6A042CD42EC1EE9C00B5C6F6 /* picture.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A042CD32EC1EE9C00B5C6F6 /* picture.xcassets */; };
 		6A042CD72EC1EE9C00B5C6F6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A042CD62EC1EE9C00B5C6F6 /* Preview Assets.xcassets */; };
+		6A0B38692EDAD56900F08509 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0B38682EDAD56900F08509 /* HomeScreen.swift */; };
 		6A17AD922ECB25B400C2DD5D /* Third_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A17AD912ECB25B400C2DD5D /* Third_Screen.swift */; };
 		6A17AD972ECB315000C2DD5D /* Main_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A17AD962ECB315000C2DD5D /* Main_Screen.swift */; };
 		6A17AD9B2ECB326A00C2DD5D /* Ronaldo.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 6A17AD9A2ECB326A00C2DD5D /* Ronaldo.jpeg */; };
@@ -29,6 +30,7 @@
 		6A042CD12EC1EE9A00B5C6F6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6A042CD32EC1EE9C00B5C6F6 /* picture.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = picture.xcassets; sourceTree = "<group>"; };
 		6A042CD62EC1EE9C00B5C6F6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6A0B38682EDAD56900F08509 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		6A17AD912ECB25B400C2DD5D /* Third_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Third_Screen.swift; sourceTree = "<group>"; };
 		6A17AD962ECB315000C2DD5D /* Main_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main_Screen.swift; sourceTree = "<group>"; };
 		6A17AD9A2ECB326A00C2DD5D /* Ronaldo.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Ronaldo.jpeg; path = ../../../../../Downloads/Ronaldo.jpeg; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 		6A042CCE2EC1EE9A00B5C6F6 /* NikeAppIOS */ = {
 			isa = PBXGroup;
 			children = (
+				6A0B38672EDAD54A00F08509 /* HomeScreen */,
 				6A4FCFD12ED9BEAD00A390B4 /* Profile_Screen */,
 				6A83A18E2ECFC1C800D1928F /* Nine_Screen */,
 				6A1D53C42ECF27B1004F4548 /* Eight_Screen */,
@@ -97,6 +100,14 @@
 				6A17AD9A2ECB326A00C2DD5D /* Ronaldo.jpeg */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6A0B38672EDAD54A00F08509 /* HomeScreen */ = {
+			isa = PBXGroup;
+			children = (
+				6A0B38682EDAD56900F08509 /* HomeScreen.swift */,
+			);
+			path = HomeScreen;
 			sourceTree = "<group>";
 		};
 		6A17AD902ECB259C00C2DD5D /* Third_Screen */ = {
@@ -258,6 +269,7 @@
 				6A9048052ECC83F00094738F /* Fifth_Screen.swift in Sources */,
 				6A39AB1A2ECE67AC006CBC1F /* Shop_Screen.swift in Sources */,
 				6A1D53C62ECF27C6004F4548 /* Eight_Screen.swift in Sources */,
+				6A0B38692EDAD56900F08509 /* HomeScreen.swift in Sources */,
 				6A9048022ECC7A550094738F /* Fourth_Screen.swift in Sources */,
 				6A042CD02EC1EE9A00B5C6F6 /* NikeAppIOSApp.swift in Sources */,
 				6A17AD922ECB25B400C2DD5D /* Third_Screen.swift in Sources */,
