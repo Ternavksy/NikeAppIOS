@@ -2,8 +2,7 @@ import SwiftUI
 
 struct Chapter_Shop_Screen: View {
     @Environment(\.presentationMode) var presentationMode
-    @StateObject private var favManager = FavoritesManager() // ✅ Создаем локально
-    @State private var showCatalogShoes = false
+    @StateObject private var favManager = FavoritesManager()
 
     let interests = [
         "work_nike", "work_nike", "work_nike", "work_nike"
@@ -24,6 +23,44 @@ struct Chapter_Shop_Screen: View {
     ]
 
     var body: some View {
+        TabView {
+            contentView
+                .tabItem {
+                    Image(systemName: "house.fill")
+                    Text("Home")
+                }
+
+            Discover_Screen()
+                .tabItem {
+                    Image(systemName: "bag")
+                    Text("Shop")
+                }
+
+            FavoritesScreen()
+                .tabItem {
+                    Image(systemName: "heart")
+                    Text("Favorites")
+                }
+
+            Text("Bag")
+                .tabItem {
+                    Image(systemName: "bag.fill")
+                    Text("Bag")
+                }
+
+            ProfileTabView()
+                .tabItem {
+                    Image(systemName: "person")
+                    Text("Profile")
+                }
+        }
+        .environmentObject(favManager)
+        .navigationBarHidden(true)
+    }
+
+    // Вынес основной экран в отдельный View,
+    // чтобы TabView не ломал существующую верстку
+    private var contentView: some View {
         VStack(spacing: 0) {
             // Header
             HStack {
@@ -34,15 +71,11 @@ struct Chapter_Shop_Screen: View {
                         .font(.system(size: 24))
                         .foregroundColor(.black)
                 }
-
                 Spacer()
-
                 Text("Shop")
                     .font(.headline)
                     .fontWeight(.semibold)
-
                 Spacer()
-
                 Image(systemName: "magnifyingglass")
                     .font(.system(size: 18))
                     .foregroundColor(.black)
@@ -54,19 +87,17 @@ struct Chapter_Shop_Screen: View {
 
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-                    
-                    // Store Locator Section
+
+                    // Store Locator
                     VStack(alignment: .center, spacing: 12) {
                         HStack(spacing: 20) {
                             Image(systemName: "smiley")
                                 .font(.system(size: 48))
                                 .foregroundColor(.gray)
-
                             Image(systemName: "bag")
                                 .font(.system(size: 48))
                                 .foregroundColor(.gray)
                         }
-
                         Text("Store Locator")
                             .font(.headline)
                             .fontWeight(.semibold)
@@ -74,15 +105,13 @@ struct Chapter_Shop_Screen: View {
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 24)
 
-                    // Shop My Interests Section
+                    // Interests section
                     VStack(alignment: .leading, spacing: 12) {
                         HStack {
                             Text("Shop My Interests")
                                 .font(.headline)
                                 .fontWeight(.semibold)
-
                             Spacer()
-
                             NavigationLink(destination: Best_Sellers()
                                 .environmentObject(favManager)) {
                                 Text("Add Interest")
@@ -107,7 +136,7 @@ struct Chapter_Shop_Screen: View {
                         }
                     }
 
-                    // Recommended Section
+                    // Recommended
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Recommended for You")
                             .font(.headline)
@@ -125,12 +154,9 @@ struct Chapter_Shop_Screen: View {
                                                 .frame(width: 180, height: 220)
                                                 .clipped()
                                                 .cornerRadius(12)
-
                                             Text(product.0)
                                                 .font(.subheadline)
                                                 .fontWeight(.semibold)
-                                                .foregroundColor(.black)
-
                                             Text(product.1)
                                                 .font(.caption)
                                                 .foregroundColor(.gray)
@@ -143,15 +169,13 @@ struct Chapter_Shop_Screen: View {
                         }
                     }
 
-                    // Nearby Stores Section
+                    // Nearby stores
                     VStack(alignment: .leading, spacing: 12) {
                         HStack {
                             Text("Nearby Stores")
                                 .font(.headline)
                                 .fontWeight(.semibold)
-
                             Spacer()
-
                             NavigationLink(destination: Text("Find a Store")) {
                                 Text("Find a Store")
                                     .font(.caption)
@@ -170,11 +194,9 @@ struct Chapter_Shop_Screen: View {
                                             .frame(width: 180, height: 220)
                                             .clipped()
                                             .cornerRadius(12)
-
                                         Text(store.0)
                                             .font(.subheadline)
                                             .fontWeight(.semibold)
-
                                         Text(store.1)
                                             .font(.caption)
                                             .foregroundColor(.gray)
@@ -188,44 +210,6 @@ struct Chapter_Shop_Screen: View {
                 }
                 .padding(.vertical, 16)
             }
-            
-            // TabView - тоже передаем environmentObject
-            TabView {
-                HomeTab()
-                    .tabItem {
-                        Image(systemName: "house.fill")
-                        Text("Home")
-                    }
-                
-                Discover_Screen()
-                    .tabItem {
-                        Image(systemName: "bag")
-                        Text("Shop")
-                    }
-                
-                // ✅ ИСПРАВЛЕНО: Убираем внутренний NavigationStack
-                FavoritesScreen()
-                    .environmentObject(favManager)
-                    .tabItem {
-                        Image(systemName: "heart")
-                        Text("Favorites")
-                    }
-
-                
-                Text("Bag")
-                    .tabItem {
-                        Image(systemName: "bag.fill")
-                        Text("Bag")
-                    }
-                
-                ProfileTabView()
-                    .tabItem {
-                        Image(systemName: "person")
-                        Text("Profile")
-                    }
-            }
-            .frame(height: 60)
-            .environmentObject(favManager) // ✅ Передаем всем tab'ам
         }
         .navigationBarBackButtonHidden(true)
     }

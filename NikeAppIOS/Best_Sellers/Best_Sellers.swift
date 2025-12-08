@@ -205,31 +205,6 @@ struct Best_Sellers: View {
                     .padding(.bottom, 100)
                 }
             }
-            
-            // MARK: — Bottom TabBar
-            VStack {
-                Spacer()
-                
-                VStack(spacing: 0) {
-                    Divider()
-                    
-                    HStack(spacing: 0) {
-                        TabBarItemView(icon: "house.fill", label: "Home", action: {
-                            presentationMode.wrappedValue.dismiss()
-                        })
-                        
-                        TabBarItemView(icon: "square.grid.2x2", label: "Shop", action: {})
-                        
-                        TabBarItemView(icon: "heart", label: "Favorites", action: {})
-                        
-                        TabBarItemView(icon: "bag", label: "Bag", action: {})
-                        
-                        TabBarItemView(icon: "person", label: "Profile", action: {})
-                    }
-                    .frame(height: 60)
-                    .background(Color.white)
-                }
-            }
         }
         .navigationBarHidden(true)
     }
