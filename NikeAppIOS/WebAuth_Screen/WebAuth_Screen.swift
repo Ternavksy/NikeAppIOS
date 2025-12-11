@@ -92,7 +92,7 @@ struct WebAuth_Screen: View {
                 
             }
             .padding(.horizontal, 20)
-            .offset(y: -90)  // ← вот здесь сдвигаем кнопки выше
+            .offset(y: -90)
 
         }
     }

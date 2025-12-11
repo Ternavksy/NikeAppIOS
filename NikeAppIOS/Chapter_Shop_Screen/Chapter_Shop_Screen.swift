@@ -57,12 +57,8 @@ struct Chapter_Shop_Screen: View {
         .environmentObject(favManager)
         .navigationBarHidden(true)
     }
-
-    // Вынес основной экран в отдельный View,
-    // чтобы TabView не ломал существующую верстку
     private var contentView: some View {
         VStack(spacing: 0) {
-            // Header
             HStack {
                 Button(action: {
                     presentationMode.wrappedValue.dismiss()
@@ -87,8 +83,6 @@ struct Chapter_Shop_Screen: View {
 
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-
-                    // Store Locator
                     VStack(alignment: .center, spacing: 12) {
                         HStack(spacing: 20) {
                             Image(systemName: "smiley")
@@ -104,8 +98,6 @@ struct Chapter_Shop_Screen: View {
                     }
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 24)
-
-                    // Interests section
                     VStack(alignment: .leading, spacing: 12) {
                         HStack {
                             Text("Shop My Interests")
@@ -135,8 +127,6 @@ struct Chapter_Shop_Screen: View {
                             .padding(.horizontal)
                         }
                     }
-
-                    // Recommended
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Recommended for You")
                             .font(.headline)
@@ -168,8 +158,6 @@ struct Chapter_Shop_Screen: View {
                             .padding(.horizontal)
                         }
                     }
-
-                    // Nearby stores
                     VStack(alignment: .leading, spacing: 12) {
                         HStack {
                             Text("Nearby Stores")

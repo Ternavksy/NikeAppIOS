@@ -6,7 +6,6 @@ struct FavoritesScreen: View {
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
-                // MARK: — Header
                 HStack {
                     Text("Favorites")
                         .font(.headline)
@@ -18,7 +17,6 @@ struct FavoritesScreen: View {
                
                 Divider()
                
-                // MARK: — Content
                 if favManager.favorites.isEmpty {
                     VStack(spacing: 12) {
                         Image(systemName: "heart")
@@ -78,8 +76,6 @@ struct FavoritesScreen: View {
                     }
                 }
             }
-           
-            // Кастомная tab bar удалена — используется основная из TabView
         }
         .navigationBarHidden(true)
     }

@@ -5,8 +5,6 @@ struct FifthScreen: View {
     private let pages = 2
     
     @State private var selectedId: UUID? = nil
-    
-    // Пример данных: замените imageName на имена ассетов ваших фотографий
     private var items: [Option] = [
         Option(title: "Mens", imageName: "Mens"),
         Option(title: "Womens", imageName: "Womens"),
@@ -17,7 +15,6 @@ struct FifthScreen: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                // Фон
                 Color.black
                     .ignoresSafeArea()
                 
@@ -29,7 +26,6 @@ struct FifthScreen: View {
                 .ignoresSafeArea()
                 
                 VStack(spacing: 0) {
-                    // --- Progress bar area ---
                     VStack {
                         Spacer().frame(height: 14)
                         ZStack(alignment: .leading) {
@@ -48,7 +44,6 @@ struct FifthScreen: View {
                     .padding(.horizontal, 24)
                     .padding(.bottom, 20)
                     
-                    // --- Title ---
                     VStack(alignment: .leading, spacing: 2) {
                         Text("First up, which")
                         Text("products do you use")
@@ -60,7 +55,6 @@ struct FifthScreen: View {
                     .offset(x: -30)
                     .padding(.bottom, 30)
                     
-                    // --- List of options ---
                     VStack(spacing: 0) {
                         OptionRow(
                             option: items[0],
@@ -86,7 +80,6 @@ struct FifthScreen: View {
                             .background(Color.white.opacity(0.08))
                             .padding(.leading, 18)
                         
-                        // Section header
                         HStack {
                             Text("Any others?")
                                 .font(.system(size: 20, weight: .semibold))
@@ -125,8 +118,6 @@ struct FifthScreen: View {
                     .padding(.top, 6)
                     
                     Spacer()
-                    
-                    // --- Bottom "home indicator" imitation ---
                     Capsule()
                         .frame(width: 140, height: 6)
                         .foregroundColor(Color.white.opacity(0.9))
@@ -176,7 +167,6 @@ fileprivate struct OptionRow: View {
                 
                 Spacer()
                 
-                // Radio button
                 ZStack {
                     Circle()
                         .stroke(Color.white.opacity(0.3), lineWidth: 2)
@@ -207,7 +197,6 @@ fileprivate struct AvatarView: View {
                     .resizable()
                     .scaledToFill()
             } else {
-                // fallback: system person image — поменяйте при необходимости
                 Image(systemName: "person.fill")
                     .resizable()
                     .scaledToFill()

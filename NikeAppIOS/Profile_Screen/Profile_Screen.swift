@@ -1,6 +1,5 @@
 import SwiftUI
 
-/// Главный контейнер со TabView
 struct MainContentView: View {
     var body: some View {
         TabView {
@@ -47,7 +46,6 @@ struct ProfileTabView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 0) {
-                    // Коллаж 2×2
                     GeometryReader { geo in
                         let w = geo.size.width
                         HStack(spacing: 8) {
@@ -63,8 +61,6 @@ struct ProfileTabView: View {
                         .frame(width: w)
                     }
                     .frame(height: 380)
-                    
-                    // Точный отступ — как у Nike (примерно 28–32 pt)
                     VStack(alignment: .leading, spacing: 6) {
                         Text("Welcome to the")
                             .font(.system(size: 28, weight: .bold))
@@ -75,13 +71,8 @@ struct ProfileTabView: View {
                             .foregroundStyle(.primary)
                     }
                     .padding(.horizontal, 20)
-                    .padding(.top, 150)          // ← вот эта строчка отвечает за «ниже опустить»
+                    .padding(.top, 150)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    // Дальше будет твой контент (кнопки Sign In / Join и т.д.)
-                    // Например:
-                    // SignInButtons()
-                    // Recommendations()
                     Spacer(minLength: 100)
                 }
             }
@@ -102,7 +93,6 @@ struct ProfileTabView: View {
     }
 }
 
-/// Одна картинка коллажа
 struct CollageImage: View {
     let name: String
     

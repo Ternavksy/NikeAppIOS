@@ -56,7 +56,6 @@ class FavoritesManager: ObservableObject {
             image: product.image
         )
        
-        // Исправлено: добавлено сравнение по price для consistency
         favorites.removeAll { $0.title == product.title && $0.subtitle == product.subtitle && $0.price == product.price }
         favorites.append(favorite)
         print("✅ Added: \(product.title)")

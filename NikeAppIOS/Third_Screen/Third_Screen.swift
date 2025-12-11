@@ -101,7 +101,6 @@ struct ThirdScreen: View {
 
         if valid {
             showError = false
-            // Успешный логин: закрываем sheet и показываем Main_Screen
             isLoggedIn = true
             dismiss()
         } else {

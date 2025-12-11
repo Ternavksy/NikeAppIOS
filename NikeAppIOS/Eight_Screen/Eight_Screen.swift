@@ -2,7 +2,7 @@ import SwiftUI
 
 struct Eight_Screen: View {
     @State private var selectedSize: String? = "11"
-    @State private var showNine = false   // ← Перенесено внутрь struct View
+    @State private var showNine = false
     
     private let sizes: [String] = [
         "4","4.5","5","5.5",
@@ -19,7 +19,6 @@ struct Eight_Screen: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                // Background
                 LinearGradient(
                     gradient: Gradient(colors: [Color(.black), Color(.sRGB, white: 0.08, opacity: 1.0)]),
                     startPoint: .top,
@@ -44,7 +43,6 @@ struct Eight_Screen: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal, 24)
 
-                    // Grid of sizes
                     ScrollView(showsIndicators: false) {
                         LazyVGrid(columns: columns, spacing: 16) {
                             ForEach(sizes, id: \.self) { size in
@@ -62,7 +60,6 @@ struct Eight_Screen: View {
 
                     Spacer()
 
-                    // Next button
                     Button(action: {
                         showNine = true
                     }) {

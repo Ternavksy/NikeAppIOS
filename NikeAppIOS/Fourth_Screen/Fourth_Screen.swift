@@ -7,7 +7,6 @@ struct Fourth_Screen: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                // --- ФОН ---
                 Image("pizdc")
                     .resizable()
                     .scaledToFill()
@@ -21,7 +20,6 @@ struct Fourth_Screen: View {
                 .ignoresSafeArea()
                 
                 VStack {
-                    // --- ПРОГРЕСС ---
                     VStack {
                         Spacer().frame(height: 14)
                         ZStack(alignment: .leading) {
@@ -40,7 +38,6 @@ struct Fourth_Screen: View {
                     .padding(.horizontal, 24)
                     .padding(.bottom, 20)
                     
-                    // --- ТЕКСТ ---
                     VStack(alignment: .leading, spacing: 2) {
                         Text("To personalize your")
                         Text("experience and")
@@ -55,7 +52,6 @@ struct Fourth_Screen: View {
                     
                     Spacer()
                     
-                    // --- КНОПКА ---
                     HStack {
                         Spacer()
                         NavigationLink(destination: NextScreen()) {

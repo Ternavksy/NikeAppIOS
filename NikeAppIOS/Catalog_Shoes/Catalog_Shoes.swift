@@ -12,7 +12,6 @@ struct Catalog_Shoes: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            // Header
             HStack {
                 Button(action: {
                     presentationMode.wrappedValue.dismiss()
@@ -38,10 +37,7 @@ struct Catalog_Shoes: View {
             .padding(.vertical, 12)
             .background(Color(.systemBackground))
             .border(Color(.systemGray5), width: 1)
-            
-            // Content
             VStack(spacing: 0) {
-                // Main big image
                 Group {
                     if selectedColor == .black {
                         Image("black_shoes")
@@ -58,11 +54,7 @@ struct Catalog_Shoes: View {
                     }
                 }
                 .frame(maxWidth: .infinity)
-                
-                // Selector like on screenshot
                 VStack(spacing: 12) {
-                    
-                    // Horizontal bar with left/right fill (ИНДИКАТОР НАД ПРЕВЬЮ)
                     GeometryReader { geo in
                         ZStack(alignment: .leading) {
                             RoundedRectangle(cornerRadius: 2)
@@ -114,8 +106,6 @@ struct Catalog_Shoes: View {
                 
                 Spacer()
             }
-            
-            // HomeTab (тот же набор вкладок, что и в Main_Screen)
             TabView {
                 HomeTab()
                     .tabItem {
@@ -147,7 +137,7 @@ struct Catalog_Shoes: View {
                         Text("Profile")
                     }
             }
-            .frame(height: 60) // можно подогнать под нужную высоту
+            .frame(height: 60)
         }
         .navigationBarBackButtonHidden(true)
     }
