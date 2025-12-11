@@ -7,7 +7,6 @@ struct ContentView: View {
 
     var body: some View {
         if isLoggedIn {
-            // Полноценный главный экран, без Back
             Main_Screen()
         } else {
             ZStack {
@@ -87,8 +86,6 @@ struct ContentView: View {
                 .padding(.bottom, 20)
             }
             .sheet(isPresented: $showForm) {
-                // Передаём Binding, чтобы ThirdScreen могла
-                // перевести приложение в состояние "залогинен"
                 ThirdScreen(isLoggedIn: $isLoggedIn)
             }
         }

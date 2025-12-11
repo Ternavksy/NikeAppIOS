@@ -21,3 +21,15 @@ struct ShopProduct: Identifiable, Equatable {
         lhs.price == rhs.price
     }
 }
+
+final class BagManager: ObservableObject {
+    @Published var items: [ShopProduct] = []
+    
+    func add(_ product: ShopProduct) {
+        items.append(product)
+    }
+    
+    func remove(_ product: ShopProduct) {
+        items.removeAll { $0 == product }
+    }
+}

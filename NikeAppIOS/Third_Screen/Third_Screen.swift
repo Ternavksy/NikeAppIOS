@@ -7,6 +7,11 @@ struct ThirdScreen: View {
     @State private var showError: Bool = false
 
     @Binding var isLoggedIn: Bool
+    @FocusState private var focusedField: Field?
+
+    private enum Field: Hashable {
+        case email
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -58,14 +63,24 @@ struct ThirdScreen: View {
                             .font(.footnote)
                             .foregroundColor(.gray)
 
-                        TextField("", text: $email)
+                        TextField("Email", text: $email)
                             .padding()
                             .background(
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(showError ? Color.red : Color.gray.opacity(0.4), lineWidth: 1)
                             )
                             .keyboardType(.emailAddress)
+                            .textContentType(.emailAddress)
                             .autocapitalization(.none)
+                            .disableAutocorrection(true)
+                            .focused($focusedField, equals: .email) // привязка фокуса
+                            .onTapGesture {
+                                focusedField = .email
+                            }
+                            .submitLabel(.done)
+                            .onSubmit {
+                                validate()
+                            }
 
                         if showError {
                             Text("Invalid email address")
@@ -88,7 +103,14 @@ struct ThirdScreen: View {
                 .background(Color(UIColor.systemGray5))
             }
         }
-        .ignoresSafeArea(edges: .bottom)
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer()
+                Button("Done") {
+                    focusedField = nil
+                }
+            }
+        }
     }
 
     private func validate() {
