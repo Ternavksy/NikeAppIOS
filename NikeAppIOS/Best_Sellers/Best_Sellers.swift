@@ -2,9 +2,13 @@ import SwiftUI
 import UIKit
 
 struct Best_Sellers: View {
-    @StateObject private var favManager = FavoritesManager()
-    @StateObject private var bagManager = BagManager()
+    // Используем общий FavoritesManager из среды
+    @EnvironmentObject var favManager: FavoritesManager
+    // Используем общий BagManager из среды (НЕ локальный @StateObject!)
+    @EnvironmentObject var bagManager: BagManager
     
+    @Environment(\.dismiss) private var dismiss
+
     @State private var selectedCategory = "Clothes"
     
     @State private var productFrames: [UUID: CGRect] = [:]
@@ -38,7 +42,7 @@ struct Best_Sellers: View {
                     price: "US$33.97",
                     image: "air-jordan1"),
         
-        ShopProduct(title: "Nike Sportswear Club",
+        ShopProduct(title: "Nike Sportwear Club",
                     subtitle: "Men's",
                     price: "US$33.97",
                     image: "air-jordan1"),
@@ -60,7 +64,7 @@ struct Best_Sellers: View {
                     price: "US$33.97",
                     image: "air-jordan1"),
         
-        ShopProduct(title: "Nike Sportswear Club",
+        ShopProduct(title: "Nike Sportwear Club",
                     subtitle: "Men's",
                     price: "US$33.97",
                     image: "orange"),
@@ -200,6 +204,7 @@ struct Best_Sellers: View {
                 // MARK: — Top Navbar
                 HStack {
                     Button(action: {
+                        dismiss() // вернуться назад в Main_Screen
                     }) {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 20, weight: .semibold))
@@ -347,50 +352,10 @@ struct Best_Sellers: View {
             }
         }
         .navigationBarHidden(true)
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            }
-        }
     }
     
     var body: some View {
-        NavigationStack {
-            TabView {
-                contentView
-                    .tabItem {
-                        Image(systemName: "house.fill")
-                        Text("Home")
-                    }
-                
-                Discover_Screen()
-                    .tabItem {
-                        Image(systemName: "bag")
-                        Text("Shop")
-                    }
-                
-                FavoritesScreen()
-                    .tabItem {
-                        Image(systemName: "heart")
-                        Text("Favorites")
-                    }
-                
-                BagScreen()
-                    .tabItem {
-                        Image(systemName: "bag.fill")
-                        Text("Bag")
-                    }
-
-                
-                ProfileTabView()
-                    .tabItem {
-                        Image(systemName: "person")
-                        Text("Profile")
-                    }
-            }
-            .environmentObject(favManager)
-            .environmentObject(bagManager)
-            .navigationBarHidden(true)
-        }
+        contentView
     }
 }
 
@@ -404,6 +369,8 @@ struct Best_Sellers_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
             Best_Sellers()
+                .environmentObject(FavoritesManager())
+                .environmentObject(BagManager())
         }
         .previewDevice("iPhone 14 Pro")
     }

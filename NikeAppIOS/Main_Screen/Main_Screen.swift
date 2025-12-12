@@ -2,7 +2,9 @@ import SwiftUI
 
 struct Main_Screen: View {
     @StateObject var favManager = FavoritesManager()
-    
+    @StateObject var bagManager = BagManager()
+    @StateObject var appState = AppState()
+
     var body: some View {
         TabView {
             NavigationStack {
@@ -12,15 +14,22 @@ struct Main_Screen: View {
                 Image(systemName: "house.fill")
                 Text("Home")
             }
-            
+            .tag(0)
+
             NavigationStack {
-                Discover_Screen()
+                if appState.onboardingCompleted {
+                    ShopScreen()
+                } else {
+                    Discover_Screen()
+                }
             }
             .tabItem {
                 Image(systemName: "bag")
                 Text("Shop")
             }
-            
+            .tag(1)
+
+            // Favorites
             NavigationStack {
                 FavoritesScreen()
             }
@@ -28,16 +37,21 @@ struct Main_Screen: View {
                 Image(systemName: "heart")
                 Text("Favorites")
             }
-            
+            .tag(2)
+
             NavigationStack {
-                Text("Bag")
-                    .navigationTitle("Bag")
+                BagScreen()
+                    .environmentObject(bagManager)
             }
             .tabItem {
                 Image(systemName: "bag.fill")
                 Text("Bag")
             }
-            
+            .tag(3)
+            .badge(bagManager.items.count)
+
+
+            // Profile
             NavigationStack {
                 ProfileTabView()
             }
@@ -45,17 +59,21 @@ struct Main_Screen: View {
                 Image(systemName: "person")
                 Text("Profile")
             }
+            .tag(4)
         }
         .environmentObject(favManager)
+        .environmentObject(bagManager)
+        .environmentObject(appState)
         .navigationBarHidden(true)
     }
 }
 
 struct HomeTab: View {
+    // Третий элемент кортежа — имя изображения
     let shoes = [
-        ("Air Jordan XXXVI", "US$185", "Air_Jordan"),
-        ("Air Jordan XXXVII", "US$190", "Air_Jordan2"),
-        ("Air Jordan XXXVIII", "US$200", "Air_Jordan3")
+        ("Air Jordan XXXVI", "US$185", "air-jordan1"),
+        ("Air Jordan XXXVII", "US$190", "air-jordan2"),
+        ("Air Jordan XXXVIII", "US$200", "air-jordan3")
     ]
 
     let shopItems = [
@@ -80,12 +98,17 @@ struct HomeTab: View {
                     HStack(spacing: 16) {
                         ForEach(shoes, id: \.0) { shoe in
                             VStack(alignment: .leading) {
-                                Image("air-jordan1")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 260, height: 260)
-                                    .background(Color(.systemGray6))
-                                    .cornerRadius(12)
+                                // Только изображение — NavigationLink к Best_Sellers
+                                NavigationLink(destination: Best_Sellers()) {
+                                    Image(shoe.2)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 260, height: 260)
+                                        .background(Color(.systemGray6))
+                                        .cornerRadius(12)
+                                }
+                                .buttonStyle(PlainButtonStyle()) // убрать стандартный стиль ссылки
+
                                 Text(shoe.0)
                                     .font(.headline)
                                     .padding(.top, 8)
@@ -103,6 +126,7 @@ struct HomeTab: View {
                     .scaledToFit()
                     .cornerRadius(16)
                     .padding(.horizontal)
+
                 VStack(alignment: .leading, spacing: 12) {
                     HStack {
                         Text("Shop My Interests")

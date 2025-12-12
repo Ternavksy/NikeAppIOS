@@ -1,184 +1,179 @@
 import SwiftUI
 
 struct Nine_Screen: View {
-    
-    @State private var code: String = ""
-    @State private var firstName: String = ""
-    @State private var lastName: String = ""
-    @State private var password: String = ""
+    @State private var code = ""
+    @State private var firstName = ""
+    @State private var lastName = ""
+    @State private var password = ""
     @State private var showPassword = false
     @State private var birthDate: Date? = nil
     @State private var showDatePicker = false
-    
+    @State private var showError = false
+    @State private var navigateToProfile = false
+
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            
-            VStack(alignment: .leading, spacing: 26) {
-                
-                // MARK: – Nike Logo (как на скриншоте)
-                Image("nike_black")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 150)
-                    .padding(.top, 20)
-                    .padding(.leading, -30)
-                
-                
-                // MARK: – Title
-                Text("Now let's make you a\nNike Member.")
-                    .font(.system(size: 32, weight: .bold))
-                    .foregroundColor(.black)
-                
-                
-                // MARK: – Email info
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("We've sent a code to")
-                        .foregroundColor(.gray)
-                        .font(.subheadline)
-                    
-                    HStack(spacing: 4) {
-                        Text("john.mobbin1@gmail.com")
-                            .font(.subheadline)
-                        
-                        Text("Edit")
-                            .font(.subheadline)
-                            .foregroundColor(.blue)
-                    }
-                }
-                
-                
-                // MARK: – Code input
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Code")
-                        .font(.footnote)
-                        .foregroundColor(.gray)
-                    
-                    HStack {
+        NavigationStack {
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 26) {
+                    Image("nike_black")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 150)
+                        .padding(.top, 20)
+                        .padding(.leading, -30)
+
+                    Text("Now let's make you a\nNike Member.")
+                        .font(.system(size: 32, weight: .bold))
+                        .foregroundColor(.black)
+
+                    // MARK: Code
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Code")
+                            .font(.footnote)
+                            .foregroundColor(.gray)
+
                         TextField("", text: $code)
                             .keyboardType(.numberPad)
                             .padding(.horizontal)
-                        
-                        Image(systemName: "arrow.clockwise")
-                            .foregroundColor(.gray)
-                            .padding(.trailing)
-                    }
-                    .frame(height: 50)
-                    .background(Color(.systemGray6))
-                    .cornerRadius(10)
-                }
-                
-                
-                // MARK: – First / Last name
-                HStack(spacing: 16) {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("First name")
-                            .font(.footnote)
-                            .foregroundColor(.gray)
-                        
-                        TextField("", text: $firstName)
-                            .padding(.horizontal)
                             .frame(height: 50)
                             .background(Color(.systemGray6))
                             .cornerRadius(10)
+
+                        if showError && code.isEmpty {
+                            Text("Please enter the code.")
+                                .font(.footnote)
+                                .foregroundColor(.red)
+                        }
                     }
-                    
+
+                    // MARK: First/Last name
+                    HStack(spacing: 16) {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("First name")
+                                .font(.footnote)
+                                .foregroundColor(.gray)
+                            TextField("", text: $firstName)
+                                .padding(.horizontal)
+                                .frame(height: 50)
+                                .background(Color(.systemGray6))
+                                .cornerRadius(10)
+                            if showError && firstName.isEmpty {
+                                Text("Required field.")
+                                    .font(.footnote)
+                                    .foregroundColor(.red)
+                            }
+                        }
+
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Surname")
+                                .font(.footnote)
+                                .foregroundColor(.gray)
+                            TextField("", text: $lastName)
+                                .padding(.horizontal)
+                                .frame(height: 50)
+                                .background(Color(.systemGray6))
+                                .cornerRadius(10)
+                            if showError && lastName.isEmpty {
+                                Text("Required field.")
+                                    .font(.footnote)
+                                    .foregroundColor(.red)
+                            }
+                        }
+                    }
+
+                    // MARK: Password
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Surname")
+                        Text("Password")
                             .font(.footnote)
                             .foregroundColor(.gray)
-                        
-                        TextField("", text: $lastName)
-                            .padding(.horizontal)
-                            .frame(height: 50)
-                            .background(Color(.systemGray6))
-                            .cornerRadius(10)
-                    }
-                }
-                
-                
-                // MARK: – Password
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Password")
-                        .font(.footnote)
-                        .foregroundColor(.gray)
-                    
-                    HStack {
-                        if showPassword {
-                            TextField("", text: $password)
-                                .padding(.horizontal)
-                        } else {
-                            SecureField("", text: $password)
-                                .padding(.horizontal)
-                        }
-                        
-                        Button {
-                            showPassword.toggle()
-                        } label: {
-                            Image(systemName: showPassword ? "eye.slash" : "eye")
-                                .foregroundColor(.gray)
-                                .padding(.trailing)
-                        }
-                    }
-                    .frame(height: 50)
-                    .background(Color(.systemGray6))
-                    .cornerRadius(10)
-                    
-                    
-                    VStack(alignment: .leading, spacing: 4) {
+
                         HStack {
-                            Image(systemName: "checkmark.circle")
-                                .foregroundColor(.green)
-                            Text("Minimum of 8 characters")
-                                .foregroundColor(.green)
-                                .font(.footnote)
+                            if showPassword {
+                                TextField("", text: $password)
+                                    .padding(.horizontal)
+                            } else {
+                                SecureField("", text: $password)
+                                    .padding(.horizontal)
+                            }
+
+                            Button {
+                                showPassword.toggle()
+                            } label: {
+                                Image(systemName: showPassword ? "eye.slash" : "eye")
+                                    .foregroundColor(.gray)
+                                    .padding(.trailing)
+                            }
                         }
-                        
-                        HStack {
-                            Image(systemName: "checkmark.circle")
-                                .foregroundColor(.green)
-                            Text("Uppercase, lowercase letters and one number")
-                                .foregroundColor(.green)
-                                .font(.footnote)
-                        }
-                    }
-                }
-                
-                
-                // MARK: – Date of birth
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Date of Birth")
-                        .font(.footnote)
-                        .foregroundColor(.gray)
-                    
-                    Button {
-                        showDatePicker = true
-                    } label: {
-                        HStack {
-                            Text(birthDate != nil ?
-                                 birthDate!.formatted(date: .numeric, time: .omitted) :
-                                 "Date of Birth")
-                                .foregroundColor(birthDate == nil ? .gray : .black)
-                            
-                            Spacer()
-                            Image(systemName: "calendar")
-                                .foregroundColor(.gray)
-                        }
-                        .padding(.horizontal)
                         .frame(height: 50)
                         .background(Color(.systemGray6))
                         .cornerRadius(10)
+
+                        if showError && password.isEmpty {
+                            Text("Password is required.")
+                                .font(.footnote)
+                                .foregroundColor(.red)
+                        }
+                    }
+
+                    // MARK: Birth Date
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Date of Birth")
+                            .font(.footnote)
+                            .foregroundColor(.gray)
+
+                        Button {
+                            showDatePicker = true
+                        } label: {
+                            HStack {
+                                Text(birthDate != nil ?
+                                     birthDate!.formatted(date: .numeric, time: .omitted) :
+                                     "Date of Birth")
+                                    .foregroundColor(birthDate == nil ? .gray : .black)
+
+                                Spacer()
+                                Image(systemName: "calendar")
+                                    .foregroundColor(.gray)
+                            }
+                            .padding(.horizontal)
+                            .frame(height: 50)
+                            .background(Color(.systemGray6))
+                            .cornerRadius(10)
+                        }
+
+                        if showError && birthDate == nil {
+                            Text("Select your date of birth.")
+                                .font(.footnote)
+                                .foregroundColor(.red)
+                        }
                     }
                 }
-                
-                Text("Get a Nike Member Reward on your birthday.")
-                    .font(.footnote)
-                    .foregroundColor(.gray)
-                    .padding(.top, -10)
-                
+                .padding(.horizontal, 26)
+
+                // MARK: Continue Button
+                NavigationLink(destination: MainContentView(), isActive: $navigateToProfile) {
+                    EmptyView()
+                }
+
+                Button(action: {
+                    if code.isEmpty || firstName.isEmpty || lastName.isEmpty || password.isEmpty || birthDate == nil {
+                        showError = true
+                    } else {
+                        navigateToProfile = true
+                    }
+                }) {
+                    Text("Continue to Profile")
+                        .font(.system(size: 18, weight: .semibold))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 14)
+                        .background(Capsule().fill(Color.black))
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 80)
+                }
+                .padding(.top, 40)
+                .padding(.bottom, 50)
             }
-            .padding(.horizontal, 26)
+            .background(Color.white)
         }
-        .background(Color.white)
         .sheet(isPresented: $showDatePicker) {
             VStack {
                 DatePicker(
@@ -191,17 +186,10 @@ struct Nine_Screen: View {
                 )
                 .datePickerStyle(.wheel)
                 .labelsHidden()
-                
-                Button("Done") {
-                    showDatePicker = false
-                }
-                .padding()
+
+                Button("Done") { showDatePicker = false }
+                    .padding()
             }
         }
     }
-}
-
-
-#Preview {
-    Nine_Screen()
 }
