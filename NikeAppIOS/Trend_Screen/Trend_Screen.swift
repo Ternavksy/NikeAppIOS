@@ -8,15 +8,16 @@ struct TrendItem: Identifiable {
 }
 
 struct Trend_Screen: View {
-
+    @Environment(\.presentationMode) var presentationMode
+    
     @State private var items: [TrendItem] = [
-        .init(title: "Baseball",      imageName: "Baseball"),
-        .init(title: "Big & Tall",    imageName: "Tall"),
-        .init(title: "Cross-Training",imageName: "Cross-Training"),
-        .init(title: "Dance",         imageName: "Dance"),
-        .init(title: "Lacrosse",      imageName: "Lacrosse"),
-        .init(title: "Maternity",     imageName: "Maternity"),
-        .init(title: "N7",            imageName: "N7"),
+        .init(title: "Baseball",       imageName: "Baseball"),
+        .init(title: "Big & Tall",     imageName: "Tall"),
+        .init(title: "Cross-Training", imageName: "Cross-Training"),
+        .init(title: "Dance",          imageName: "Dance"),
+        .init(title: "Lacrosse",       imageName: "Lacrosse"),
+        .init(title: "Maternity",      imageName: "Maternity"),
+        .init(title: "N7",             imageName: "N7"),
         .init(title: "Nike Sportswear", imageName: "Sportswear")
     ]
 
@@ -24,11 +25,13 @@ struct Trend_Screen: View {
         ZStack {
             Color.black.ignoresSafeArea()
             VStack {
+                // Индикатор сверху вместо навбара
                 Rectangle()
                     .fill(Color.white.opacity(0.8))
                     .frame(height: 3)
                     .padding(.horizontal, 80)
                     .padding(.top, 12)
+                
                 List {
                     ForEach(items.indices, id: \.self) { index in
                         TrendRow(
@@ -44,7 +47,10 @@ struct Trend_Screen: View {
                 }
                 .scrollContentBackground(.hidden)
                 .listStyle(.plain)
+
                 Button(action: {
+                    // Возвращаемся назад на Chapter_Shop_Screen
+                    presentationMode.wrappedValue.dismiss()
                 }) {
                     Text("Next")
                         .font(.system(size: 18, weight: .semibold))
@@ -57,6 +63,8 @@ struct Trend_Screen: View {
                 .padding(.bottom, 20)
             }
         }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
     }
 }
 
@@ -99,8 +107,9 @@ struct TrendRow: View {
 
 struct Trend_Screen_Previews: PreviewProvider {
     static var previews: some View {
-        Trend_Screen()
-            .previewDevice("iPhone 14 Pro")
+        NavigationStack {
+            Trend_Screen()
+        }
+        .previewDevice("iPhone 14 Pro")
     }
 }
-
