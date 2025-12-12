@@ -73,13 +73,13 @@ struct ThirdScreen: View {
                             .textContentType(.emailAddress)
                             .autocapitalization(.none)
                             .disableAutocorrection(true)
-                            .focused($focusedField, equals: .email) // привязка фокуса
-                            .onTapGesture {
-                                focusedField = .email
-                            }
+                            .focused($focusedField, equals: .email)
                             .submitLabel(.done)
                             .onSubmit {
                                 validate()
+                            }
+                            .onTapGesture {
+                                focusedField = .email
                             }
 
                         if showError {
@@ -103,12 +103,9 @@ struct ThirdScreen: View {
                 .background(Color(UIColor.systemGray5))
             }
         }
-        .toolbar {
-            ToolbarItemGroup(placement: .keyboard) {
-                Spacer()
-                Button("Done") {
-                    focusedField = nil
-                }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                focusedField = .email
             }
         }
     }

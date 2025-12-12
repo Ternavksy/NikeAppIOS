@@ -5,6 +5,8 @@ struct FifthScreen: View {
     private let pages = 2
     
     @State private var selectedId: UUID? = nil
+    @State private var showShopScreen = false // Добавлено для навигации
+    
     private var items: [Option] = [
         Option(title: "Mens", imageName: "Mens"),
         Option(title: "Womens", imageName: "Womens"),
@@ -59,7 +61,7 @@ struct FifthScreen: View {
                         OptionRow(
                             option: items[0],
                             isSelected: selectedId == items[0].id,
-                            onTap: { toggleSelection(for: items[0]) }
+                            onTap: { handleOptionTap(items[0]) }
                         )
                         .padding(.horizontal, 18)
                         .padding(.vertical, 18)
@@ -71,7 +73,7 @@ struct FifthScreen: View {
                         OptionRow(
                             option: items[1],
                             isSelected: selectedId == items[1].id,
-                            onTap: { toggleSelection(for: items[1]) }
+                            onTap: { handleOptionTap(items[1]) }
                         )
                         .padding(.horizontal, 18)
                         .padding(.vertical, 18)
@@ -96,7 +98,7 @@ struct FifthScreen: View {
                         OptionRow(
                             option: items[2],
                             isSelected: selectedId == items[2].id,
-                            onTap: { toggleSelection(for: items[2]) }
+                            onTap: { handleOptionTap(items[2]) }
                         )
                         .padding(.horizontal, 18)
                         .padding(.vertical, 18)
@@ -108,7 +110,7 @@ struct FifthScreen: View {
                         OptionRow(
                             option: items[3],
                             isSelected: selectedId == items[3].id,
-                            onTap: { toggleSelection(for: items[3]) }
+                            onTap: { handleOptionTap(items[3]) }
                         )
                         .padding(.horizontal, 18)
                         .padding(.vertical, 18)
@@ -126,6 +128,9 @@ struct FifthScreen: View {
                 .padding(.top, 8)
             }
             .navigationBarHidden(true)
+            .fullScreenCover(isPresented: $showShopScreen) {
+                ShopScreen()
+            }
         }
     }
     
@@ -138,10 +143,18 @@ struct FifthScreen: View {
             }
         }
     }
+    
+    // Новая функция для обработки нажатия на опцию
+    private func handleOptionTap(_ option: Option) {
+        toggleSelection(for: option)
+        // Переход на ShopScreen через небольшую задержку для показа анимации выбора
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            showShopScreen = true
+        }
+    }
 }
 
 // MARK: - Option Model
-
 fileprivate struct Option: Identifiable, Hashable {
     let id = UUID()
     let title: String
@@ -149,7 +162,6 @@ fileprivate struct Option: Identifiable, Hashable {
 }
 
 // MARK: - Option Row View
-
 fileprivate struct OptionRow: View {
     let option: Option
     let isSelected: Bool
@@ -185,8 +197,7 @@ fileprivate struct OptionRow: View {
     }
 }
 
-// MARK: - Avatar View (tries asset, otherwise system symbol)
-
+// MARK: - Avatar View
 fileprivate struct AvatarView: View {
     let imageName: String
     
@@ -211,9 +222,6 @@ fileprivate struct AvatarView: View {
         .shadow(color: Color.black.opacity(0.6), radius: 4, x: 0, y: 1)
     }
 }
-
-
-// MARK: - Preview
 
 struct FifthScreen_Previews: PreviewProvider {
     static var previews: some View {

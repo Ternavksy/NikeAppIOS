@@ -2,6 +2,7 @@ import SwiftUI
 
 struct Fourth_Screen: View {
     @State private var currentPage: Int = 0
+    @State private var showFifthScreen = false
     private let pages = 2
     
     var body: some View {
@@ -54,15 +55,15 @@ struct Fourth_Screen: View {
                     
                     HStack {
                         Spacer()
-                        NavigationLink(destination: NextScreen()) {
-                            Text("Get Started")
-                                .font(.system(size: 18, weight: .semibold))
-                                .foregroundColor(.black)
-                                .frame(width: 220, height: 54)
-                                .background(Color.white)
-                                .cornerRadius(27)
-                                .shadow(color: Color.black.opacity(0.25), radius: 8, x: 0, y: 6)
+                        Button("Get Started") {
+                            showFifthScreen = true
                         }
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundColor(.black)
+                        .frame(width: 220, height: 54)
+                        .background(Color.white)
+                        .cornerRadius(27)
+                        .shadow(color: Color.black.opacity(0.25), radius: 8, x: 0, y: 6)
                         Spacer()
                     }
                     .padding(.bottom, 16)
@@ -70,16 +71,9 @@ struct Fourth_Screen: View {
                 .frame(maxHeight: .infinity, alignment: .top)
             }
             .navigationBarHidden(true)
-        }
-    }
-}
-
-struct NextScreen: View {
-    var body: some View {
-        ZStack {
-            Color(.systemBackground).ignoresSafeArea()
-            Text("Next Screen")
-                .font(.title)
+            .fullScreenCover(isPresented: $showFifthScreen) {
+                FifthScreen()
+            }
         }
     }
 }

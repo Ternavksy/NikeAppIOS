@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct Discover_Screen: View {
-    @State private var showAuthSheet = false
+    @State private var showFourthScreen = false
     
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -17,7 +17,6 @@ struct Discover_Screen: View {
                 }
                 .padding(.horizontal)
                 .padding(.top)
-                
                 
                 ZStack(alignment: .bottomLeading) {
                     
@@ -36,7 +35,7 @@ struct Discover_Screen: View {
                             .foregroundColor(.white)
                         
                         Button("Shop Now") {
-                            showAuthSheet = true
+                            showFourthScreen = true
                         }
                         .font(.system(size: 17, weight: .semibold))
                         .padding(.horizontal, 24)
@@ -54,8 +53,8 @@ struct Discover_Screen: View {
             }
         }
         .background(Color.white)
-        .sheet(isPresented: $showAuthSheet) {
-            WebAuth_Screen()
+        .fullScreenCover(isPresented: $showFourthScreen) {
+            Fourth_Screen()
         }
     }
 }
