@@ -38,7 +38,6 @@ struct Main_Screen: View {
             }
             .tag(1)
 
-            // Favorites
             NavigationStack {
                 FavoritesScreen()
                     .environmentObject(favManager)
@@ -63,9 +62,6 @@ struct Main_Screen: View {
             }
             .tag(3)
             .badge(bagManager.items.count)
-
-
-            // Profile
             NavigationStack {
                 ProfileTabView()
                     .environmentObject(favManager)

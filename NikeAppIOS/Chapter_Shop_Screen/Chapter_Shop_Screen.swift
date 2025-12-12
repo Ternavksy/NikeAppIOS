@@ -22,12 +22,11 @@ struct Chapter_Shop_Screen: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            // Custom Navigation Bar
             HStack {
                 Button { presentationMode.wrappedValue.dismiss() } label: {
                     Image(systemName: "chevron.left")
                         .font(.system(size: 20))
-                        .foregroundColor(.blue)
+                        .foregroundColor(.black)
                         .frame(width: 44, height: 44)
                 }
                 Spacer()
@@ -45,7 +44,6 @@ struct Chapter_Shop_Screen: View {
             
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
-                    // Store Locator
                     VStack(alignment: .center, spacing: 12) {
                         HStack(spacing: 20) {
                             Image(systemName: "smiley").font(.system(size: 48)).foregroundColor(.gray)
@@ -55,8 +53,6 @@ struct Chapter_Shop_Screen: View {
                     }
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 24)
-                    
-                    // Shop My Interests
                     VStack(alignment: .leading, spacing: 12) {
                         HStack {
                             Text("Shop My Interests").font(.headline).fontWeight(.semibold)
@@ -81,8 +77,6 @@ struct Chapter_Shop_Screen: View {
                             }.padding(.horizontal)
                         }
                     }
-                    
-                    // Recommended for You - ✅ БЕЗ appState!
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Recommended for You")
                             .font(.headline)
@@ -93,7 +87,7 @@ struct Chapter_Shop_Screen: View {
                                 ForEach(recommended, id: \.0) { product in
                                     NavigationLink(destination: Catalog_Shoes()
                                         .environmentObject(favManager)
-                                        .environmentObject(bagManager)) {  // ✅ УБРАЛ appState
+                                        .environmentObject(bagManager)) {
                                         VStack(alignment: .leading, spacing: 8) {
                                             Image(product.2)
                                                 .resizable()
@@ -111,8 +105,6 @@ struct Chapter_Shop_Screen: View {
                             }.padding(.horizontal)
                         }
                     }
-                    
-                    // Nearby Stores
                     VStack(alignment: .leading, spacing: 12) {
                         HStack {
                             Text("Nearby Stores").font(.headline).fontWeight(.semibold)

@@ -8,7 +8,7 @@ struct TrendItem: Identifiable {
 }
 
 struct Trend_Screen: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) private var dismiss
     
     @State private var items: [TrendItem] = [
         .init(title: "Baseball",       imageName: "Baseball"),
@@ -25,7 +25,23 @@ struct Trend_Screen: View {
         ZStack {
             Color.black.ignoresSafeArea()
             VStack {
-                // Индикатор сверху вместо навбара
+                // Кастомная кнопка назад
+                HStack {
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 20, weight: .medium))
+                            .foregroundColor(.white)
+                            .frame(width: 44, height: 44)
+                            .background(Color.black.opacity(0.3))
+                            .clipShape(Circle())
+                    }
+                    Spacer()
+                }
+                .padding(.horizontal, 20)
+                .padding(.top, 50)
+
                 Rectangle()
                     .fill(Color.white.opacity(0.8))
                     .frame(height: 3)
@@ -49,8 +65,7 @@ struct Trend_Screen: View {
                 .listStyle(.plain)
 
                 Button(action: {
-                    // Возвращаемся назад на Chapter_Shop_Screen
-                    presentationMode.wrappedValue.dismiss()
+                    dismiss()
                 }) {
                     Text("Next")
                         .font(.system(size: 18, weight: .semibold))
@@ -63,8 +78,10 @@ struct Trend_Screen: View {
                 .padding(.bottom, 20)
             }
         }
-        .navigationBarBackButtonHidden(true)
+        // КРИТИЧЕСКИ ВАЖНО - убирает таббар
         .navigationBarHidden(true)
+        .toolbar(.hidden, for: .tabBar)
+        .ignoresSafeArea(.keyboard)
     }
 }
 
@@ -107,9 +124,7 @@ struct TrendRow: View {
 
 struct Trend_Screen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
-            Trend_Screen()
-        }
-        .previewDevice("iPhone 14 Pro")
+        Trend_Screen()
+            .previewDevice("iPhone 14 Pro")
     }
 }

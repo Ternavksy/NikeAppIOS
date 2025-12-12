@@ -8,7 +8,6 @@ struct ShopScreen: View {
 
     var body: some View {
         TabView {
-            // Home
             NavigationStack {
                 HomeTab()
             }
@@ -16,8 +15,6 @@ struct ShopScreen: View {
                 Image(systemName: "house.fill")
                 Text("Home")
             }
-
-            // Shop (контент вынесен в ShopContent)
             NavigationStack {
                 ShopContent()
             }
@@ -25,8 +22,6 @@ struct ShopScreen: View {
                 Image(systemName: "bag")
                 Text("Shop")
             }
-
-            // Favorites
             NavigationStack {
                 FavoritesScreen()
             }
@@ -34,8 +29,6 @@ struct ShopScreen: View {
                 Image(systemName: "heart")
                 Text("Favorites")
             }
-
-            // Bag (НАСТОЯЩИЙ экран корзины)
             NavigationStack {
                 BagScreen()
             }
@@ -44,7 +37,6 @@ struct ShopScreen: View {
                 Text("Bag")
             }
 
-            // Profile
             NavigationStack {
                 ProfileTabView()
             }
@@ -98,44 +90,43 @@ struct ShopContent: View {
                         .padding(.horizontal)
 
                     HStack(spacing: 12) {
-                        NavigationLink(destination: Eight_Screen()) {
-                            Image("image 18")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: UIScreen.main.bounds.width/2 - 22, height: 200)
-                                .clipped()
-                                .cornerRadius(10)
+                        VStack(alignment: .leading, spacing: 8) {
+                            NavigationLink(destination: Eight_Screen()) {
+                                Image("image 18")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: UIScreen.main.bounds.width/2 - 22, height: 200)
+                                    .clipped()
+                                    .cornerRadius(10)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                            
+                            NavigationLink(destination: Eight_Screen()) {
+                                Text("Best Sellers")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(.gray)
+                            }
+                            .buttonStyle(PlainButtonStyle())
                         }
-                        .buttonStyle(PlainButtonStyle())
-
-                        NavigationLink(destination: Eight_Screen()) {
-                            Image("image 19")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: UIScreen.main.bounds.width/2 - 22, height: 200)
-                                .clipped()
-                                .cornerRadius(10)
+                        VStack(alignment: .leading, spacing: 8) {
+                            NavigationLink(destination: Eight_Screen()) {
+                                Image("image 19")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: UIScreen.main.bounds.width/2 - 22, height: 200)
+                                    .clipped()
+                                    .cornerRadius(10)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                            
+                            NavigationLink(destination: Eight_Screen()) {
+                                Text("Featured in Nike Air")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(.gray)
+                            }
+                            .buttonStyle(PlainButtonStyle())
                         }
-                        .buttonStyle(PlainButtonStyle())
                     }
-                    .padding(.horizontal)
-
-                    HStack {
-                        NavigationLink(destination: Eight_Screen()) {
-                            Text("Best Sellers")
-                                .font(.system(size: 14))
-                        }
-                        .buttonStyle(PlainButtonStyle())
-
-                        Spacer().frame(width: 12)
-
-                        NavigationLink(destination: Eight_Screen()) {
-                            Text("Featured in Nike Air")
-                                .font(.system(size: 14))
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                    }
-                    .foregroundColor(.gray)
                     .padding(.horizontal)
                 }
 

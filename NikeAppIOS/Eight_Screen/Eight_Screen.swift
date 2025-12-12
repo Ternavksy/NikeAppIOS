@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct Eight_Screen: View {
+    @Environment(\.dismiss) private var dismiss
     @State private var selectedSize: String? = "11"
     @State private var showNine = false
     
@@ -17,71 +18,87 @@ struct Eight_Screen: View {
     private let columns: [GridItem] = Array(repeating: .init(.flexible(), spacing: 16), count: 4)
 
     var body: some View {
-        NavigationStack {
-            ZStack {
-                LinearGradient(
-                    gradient: Gradient(colors: [Color(.black), Color(.sRGB, white: 0.08, opacity: 1.0)]),
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-                .ignoresSafeArea()
+        ZStack {
+            LinearGradient(
+                gradient: Gradient(colors: [Color(.black), Color(.sRGB, white: 0.08, opacity: 1.0)]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
 
-                VStack(spacing: 24) {
-                    ProgressView(value: 0.38) {
-                        EmptyView()
+            VStack(spacing: 24) {
+                // Кнопка назад
+                HStack {
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 20, weight: .medium))
+                            .foregroundColor(.white)
+                            .frame(width: 40, height: 40)
+                            .background(Color.black.opacity(0.3))
+                            .clipShape(Circle())
                     }
-                    .progressViewStyle(LinearProgressViewStyle(tint: Color.white.opacity(0.9)))
-                    .frame(width: 150, height: 6)
-                    .padding(.leading, 25)
-                    .padding(.trailing, 12)
-                    .padding(.top, 8)
+                    Spacer()
+                }
+                .padding(.horizontal, 24)
+                .padding(.top, 50)
 
-                    // Title
-                    Text("What's your shoe size?")
-                        .font(.system(size: 32, weight: .bold))
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.horizontal, 24)
+                ProgressView(value: 0.38) {
+                    EmptyView()
+                }
+                .progressViewStyle(LinearProgressViewStyle(tint: Color.white.opacity(0.9)))
+                .frame(width: 150, height: 6)
+                .padding(.leading, 25)
+                .padding(.trailing, 12)
 
-                    ScrollView(showsIndicators: false) {
-                        LazyVGrid(columns: columns, spacing: 16) {
-                            ForEach(sizes, id: \.self) { size in
-                                SizeButton(size: size, isSelected: size == selectedSize) {
-                                    withAnimation(.spring()) {
-                                        selectedSize = size
-                                    }
+                Text("What's your shoe size?")
+                    .font(.system(size: 32, weight: .bold))
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 24)
+
+                ScrollView(showsIndicators: false) {
+                    LazyVGrid(columns: columns, spacing: 16) {
+                        ForEach(sizes, id: \.self) { size in
+                            SizeButton(size: size, isSelected: size == selectedSize) {
+                                withAnimation(.spring()) {
+                                    selectedSize = size
                                 }
                             }
                         }
-                        .padding(.horizontal, 24)
-                        .padding(.top, 8)
-                        .padding(.bottom, 40)
                     }
+                    .padding(.horizontal, 24)
+                    .padding(.top, 8)
+                    .padding(.bottom, 40)
+                }
 
-                    Spacer()
+                Spacer()
 
-                    Button(action: {
-                        showNine = true
-                    }) {
-                        Text("Next")
-                            .font(.system(size: 18, weight: .semibold))
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 14)
-                            .background(
-                                Capsule()
-                                    .fill(Color.white)
-                            )
-                            .foregroundColor(.black)
-                            .padding(.horizontal, 80)
-                    }
-                    .padding(.bottom, 28)
-                    .sheet(isPresented: $showNine) {
-                        Nine_Screen()
-                    }
+                Button(action: {
+                    showNine = true
+                }) {
+                    Text("Next")
+                        .font(.system(size: 18, weight: .semibold))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 14)
+                        .background(
+                            Capsule()
+                                .fill(Color.white)
+                        )
+                        .foregroundColor(.black)
+                        .padding(.horizontal, 80)
+                }
+                .padding(.bottom, 28)
+                .sheet(isPresented: $showNine) {
+                    Nine_Screen()
                 }
             }
-            .navigationBarHidden(true)
         }
+        // КРИТИЧЕСКИ ВАЖНО - эти модификаторы убирают таббар
+        .navigationBarHidden(true)
+        .toolbar(.hidden, for: .tabBar)
+        .ignoresSafeArea(.keyboard)
     }
 }
 

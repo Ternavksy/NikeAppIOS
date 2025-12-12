@@ -2,7 +2,6 @@ import SwiftUI
 import UIKit
 
 struct Best_Sellers: View {
-    // Общие менеджеры
     @EnvironmentObject var favManager: FavoritesManager
     @EnvironmentObject var bagManager: BagManager
     
@@ -127,8 +126,6 @@ struct Best_Sellers: View {
         flyingScale = 1.0
         flyingOpacity = 1.0
         flyingVisible = true
-        
-        // Летим просто в правый нижний угол экрана
         let screen = UIScreen.main.bounds
         let targetCenter = CGPoint(x: screen.maxX - 48, y: screen.maxY - 48)
         let finalScale: CGFloat = 0.15
@@ -142,7 +139,6 @@ struct Best_Sellers: View {
                 flyingOpacity = 0.0
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + fadeDuration * 0.6) {
-                // Здесь гарантированно добавляем в общий bagManager
                 bagManager.add(product)
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + fadeDuration + 0.06) {
