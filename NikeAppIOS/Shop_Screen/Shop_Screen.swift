@@ -2,8 +2,9 @@ import SwiftUI
 
 // MARK: - Top-level Tabbed ShopScreen
 struct ShopScreen: View {
-    @StateObject var favManager = FavoritesManager()
-    @StateObject var appState = AppState()
+    @EnvironmentObject var favManager: FavoritesManager
+    @EnvironmentObject var bagManager: BagManager
+    @EnvironmentObject var appState: AppState
 
     var body: some View {
         TabView {
@@ -16,7 +17,7 @@ struct ShopScreen: View {
                 Text("Home")
             }
 
-            // Shop (наш контент вынесён в ShopContent)
+            // Shop (контент вынесен в ShopContent)
             NavigationStack {
                 ShopContent()
             }
@@ -34,10 +35,9 @@ struct ShopScreen: View {
                 Text("Favorites")
             }
 
-            // Bag
+            // Bag (НАСТОЯЩИЙ экран корзины)
             NavigationStack {
-                Text("Bag")
-                    .navigationTitle("Bag")
+                BagScreen()
             }
             .tabItem {
                 Image(systemName: "bag.fill")
@@ -53,8 +53,6 @@ struct ShopScreen: View {
                 Text("Profile")
             }
         }
-        .environmentObject(favManager)
-        .environmentObject(appState)
         .navigationBarHidden(true)
     }
 }
@@ -66,9 +64,7 @@ struct ShopContent: View {
     let tabs = ["Men", "Women", "Kids"]
 
     var body: some View {
-        // Убираем вложенный NavigationStack — навигация будет идти через NavigationStack в ShopScreen
         ScrollView(.vertical, showsIndicators: false) {
-
             VStack(alignment: .leading, spacing: 24) {
 
                 // MARK: - Tabs Men / Women / Kids
@@ -101,7 +97,6 @@ struct ShopContent: View {
                         .font(.system(size: 22, weight: .bold))
                         .padding(.horizontal)
 
-                    // Изображения теперь обёрнуты в NavigationLink — при нажатии откроется Eight_Screen
                     HStack(spacing: 12) {
                         NavigationLink(destination: Eight_Screen()) {
                             Image("image 18")
@@ -125,7 +120,6 @@ struct ShopContent: View {
                     }
                     .padding(.horizontal)
 
-                    // Тексты тоже обёрнуты в NavigationLink
                     HStack {
                         NavigationLink(destination: Eight_Screen()) {
                             Text("Best Sellers")

@@ -2,9 +2,8 @@ import SwiftUI
 import UIKit
 
 struct Best_Sellers: View {
-    // Используем общий FavoritesManager из среды
+    // Общие менеджеры
     @EnvironmentObject var favManager: FavoritesManager
-    // Используем общий BagManager из среды (НЕ локальный @StateObject!)
     @EnvironmentObject var bagManager: BagManager
     
     @Environment(\.dismiss) private var dismiss
@@ -112,44 +111,7 @@ struct Best_Sellers: View {
         }
     }
     
-    // MARK: - Helpers to find UITabBar and its item frame
-    private func findTabBar() -> UITabBar? {
-        let scenes = UIApplication.shared.connectedScenes
-        for scene in scenes {
-            if let windowScene = scene as? UIWindowScene {
-                for window in windowScene.windows {
-                    if let tabBar = findTabBar(in: window) {
-                        return tabBar
-                    }
-                }
-            }
-        }
-        return nil
-    }
-    private func findTabBar(in view: UIView) -> UITabBar? {
-        if let tb = view as? UITabBar { return tb }
-        for sub in view.subviews {
-            if let found = findTabBar(in: sub) { return found }
-        }
-        return nil
-    }
-    private func frameForTabBarItem(index: Int) -> CGRect? {
-        guard let tabBar = findTabBar() else { return nil }
-        let buttons = tabBar.subviews
-            .filter { $0 is UIControl }
-            .sorted { $0.frame.minX < $1.frame.minX }
-        guard index >= 0 && index < buttons.count else { return nil }
-        let button = buttons[index]
-        if let window = button.window {
-            return button.convert(button.bounds, to: window)
-        } else if let rootWindow = UIApplication.shared.windows.first {
-            return button.convert(button.bounds, to: rootWindow)
-        } else {
-            return nil
-        }
-    }
-    
-    // MARK: - Start flight animation
+    // MARK: - Start flight animation (без поиска UITabBar)
     private func startFlyToBag(product: ShopProduct) {
         guard let startFrame = productFrames[product.id] else {
             bagManager.add(product)
@@ -159,26 +121,18 @@ struct Best_Sellers: View {
         let startCenter = CGPoint(x: startFrame.midX, y: startFrame.midY)
         let startSize = CGSize(width: startFrame.width, height: startFrame.height)
         
-        let bagIndex = 3
-        let targetFrame = frameForTabBarItem(index: bagIndex)
-        
         flyingImageName = product.image
         flyingSize = startSize
         flyingPosition = startCenter
         flyingScale = 1.0
         flyingOpacity = 1.0
         flyingVisible = true
-        let targetCenter: CGPoint
-        let finalScale: CGFloat
-        if let t = targetFrame {
-            targetCenter = CGPoint(x: t.midX, y: t.midY)
-            let targetWidth: CGFloat = min(t.width * 0.6, 28)
-            finalScale = (targetWidth / startSize.width).clamped(to: 0.06...1.0)
-        } else {
-            let screen = UIScreen.main.bounds
-            targetCenter = CGPoint(x: screen.maxX - 48, y: screen.maxY - 48)
-            finalScale = 0.15
-        }
+        
+        // Летим просто в правый нижний угол экрана
+        let screen = UIScreen.main.bounds
+        let targetCenter = CGPoint(x: screen.maxX - 48, y: screen.maxY - 48)
+        let finalScale: CGFloat = 0.15
+        
         withAnimation(.interpolatingSpring(stiffness: 220, damping: 22).speed(1.0)) {
             flyingPosition = targetCenter
             flyingScale = finalScale
@@ -188,6 +142,7 @@ struct Best_Sellers: View {
                 flyingOpacity = 0.0
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + fadeDuration * 0.6) {
+                // Здесь гарантированно добавляем в общий bagManager
                 bagManager.add(product)
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + fadeDuration + 0.06) {
@@ -204,7 +159,7 @@ struct Best_Sellers: View {
                 // MARK: — Top Navbar
                 HStack {
                     Button(action: {
-                        dismiss() // вернуться назад в Main_Screen
+                        dismiss()
                     }) {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 20, weight: .semibold))
@@ -328,11 +283,13 @@ struct Best_Sellers: View {
                 }
             }
             
-            // MARK: - Flying image overlay (absolute coords)
+            // MARK: - Flying image overlay
             if flyingVisible, let imgName = flyingImageName {
                 GeometryReader { fullGeo in
-                    let localPoint = CGPoint(x: flyingPosition.x - fullGeo.frame(in: .global).minX,
-                    y: flyingPosition.y - fullGeo.frame(in: .global).minY)
+                    let localPoint = CGPoint(
+                        x: flyingPosition.x - fullGeo.frame(in: .global).minX,
+                        y: flyingPosition.y - fullGeo.frame(in: .global).minY
+                    )
                     
                     Image(imgName)
                         .resizable()

@@ -9,6 +9,9 @@ struct Main_Screen: View {
         TabView {
             NavigationStack {
                 HomeTab()
+                    .environmentObject(favManager)
+                    .environmentObject(bagManager)
+                    .environmentObject(appState)
             }
             .tabItem {
                 Image(systemName: "house.fill")
@@ -19,8 +22,14 @@ struct Main_Screen: View {
             NavigationStack {
                 if appState.onboardingCompleted {
                     ShopScreen()
+                        .environmentObject(favManager)
+                        .environmentObject(bagManager)
+                        .environmentObject(appState)
                 } else {
                     Discover_Screen()
+                        .environmentObject(favManager)
+                        .environmentObject(bagManager)
+                        .environmentObject(appState)
                 }
             }
             .tabItem {
@@ -32,6 +41,9 @@ struct Main_Screen: View {
             // Favorites
             NavigationStack {
                 FavoritesScreen()
+                    .environmentObject(favManager)
+                    .environmentObject(bagManager)
+                    .environmentObject(appState)
             }
             .tabItem {
                 Image(systemName: "heart")
@@ -42,6 +54,8 @@ struct Main_Screen: View {
             NavigationStack {
                 BagScreen()
                     .environmentObject(bagManager)
+                    .environmentObject(favManager)
+                    .environmentObject(appState)
             }
             .tabItem {
                 Image(systemName: "bag.fill")
@@ -54,6 +68,9 @@ struct Main_Screen: View {
             // Profile
             NavigationStack {
                 ProfileTabView()
+                    .environmentObject(favManager)
+                    .environmentObject(bagManager)
+                    .environmentObject(appState)
             }
             .tabItem {
                 Image(systemName: "person")
@@ -61,19 +78,19 @@ struct Main_Screen: View {
             }
             .tag(4)
         }
-        .environmentObject(favManager)
-        .environmentObject(bagManager)
-        .environmentObject(appState)
         .navigationBarHidden(true)
     }
 }
 
 struct HomeTab: View {
-    // Третий элемент кортежа — имя изображения
+    @EnvironmentObject var favManager: FavoritesManager
+    @EnvironmentObject var bagManager: BagManager
+    @EnvironmentObject var appState: AppState
+    
     let shoes = [
         ("Air Jordan XXXVI", "US$185", "air-jordan1"),
-        ("Air Jordan XXXVII", "US$190", "air-jordan2"),
-        ("Air Jordan XXXVIII", "US$200", "air-jordan3")
+        ("Air Jordan XXXVII", "US$190", "air-jordan1"),
+        ("Air Jordan XXXVIII", "US$200", "air-jordan1")
     ]
 
     let shopItems = [
@@ -98,8 +115,9 @@ struct HomeTab: View {
                     HStack(spacing: 16) {
                         ForEach(shoes, id: \.0) { shoe in
                             VStack(alignment: .leading) {
-                                // Только изображение — NavigationLink к Best_Sellers
-                                NavigationLink(destination: Best_Sellers()) {
+                                NavigationLink(destination: Best_Sellers()
+                                    .environmentObject(favManager)
+                                    .environmentObject(bagManager)) {
                                     Image(shoe.2)
                                         .resizable()
                                         .scaledToFit()
@@ -107,7 +125,7 @@ struct HomeTab: View {
                                         .background(Color(.systemGray6))
                                         .cornerRadius(12)
                                 }
-                                .buttonStyle(PlainButtonStyle()) // убрать стандартный стиль ссылки
+                                .buttonStyle(PlainButtonStyle())
 
                                 Text(shoe.0)
                                     .font(.headline)
@@ -133,7 +151,9 @@ struct HomeTab: View {
                             .font(.headline)
                             .fontWeight(.semibold)
                         Spacer()
-                        NavigationLink(destination: Chapter_Shop_Screen()) {
+                        NavigationLink(destination: Chapter_Shop_Screen()
+                            .environmentObject(favManager)
+                            .environmentObject(bagManager)) {
                             Text("Add Interest")
                                 .font(.caption)
                                 .foregroundColor(.blue)
@@ -143,7 +163,9 @@ struct HomeTab: View {
 
                     VStack(spacing: 12) {
                         HStack(spacing: 12) {
-                            NavigationLink(destination: Chapter_Shop_Screen()) {
+                            NavigationLink(destination: Chapter_Shop_Screen()
+                                .environmentObject(favManager)
+                                .environmentObject(bagManager)) {
                                 VStack(alignment: .leading, spacing: 8) {
                                     Image("air-jordan1")
                                         .resizable()
@@ -157,7 +179,9 @@ struct HomeTab: View {
                                 }
                             }
 
-                            NavigationLink(destination: Chapter_Shop_Screen()) {
+                            NavigationLink(destination: Chapter_Shop_Screen()
+                                .environmentObject(favManager)
+                                .environmentObject(bagManager)) {
                                 VStack(alignment: .leading, spacing: 8) {
                                     Image("air-jordan1")
                                         .resizable()
@@ -173,7 +197,9 @@ struct HomeTab: View {
                         }
 
                         HStack(spacing: 12) {
-                            NavigationLink(destination: Chapter_Shop_Screen()) {
+                            NavigationLink(destination: Chapter_Shop_Screen()
+                                .environmentObject(favManager)
+                                .environmentObject(bagManager)) {
                                 VStack(alignment: .leading, spacing: 8) {
                                     Image("air-jordan1")
                                         .resizable()
@@ -187,7 +213,9 @@ struct HomeTab: View {
                                 }
                             }
 
-                            NavigationLink(destination: Chapter_Shop_Screen()) {
+                            NavigationLink(destination: Chapter_Shop_Screen()
+                                .environmentObject(favManager)
+                                .environmentObject(bagManager)) {
                                 VStack(alignment: .leading, spacing: 8) {
                                     Image("air-jordan1")
                                         .resizable()
