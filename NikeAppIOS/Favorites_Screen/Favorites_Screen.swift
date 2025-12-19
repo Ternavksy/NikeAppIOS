@@ -6,17 +6,19 @@ struct FavoritesScreen: View {
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
+
+                // MARK: - Header
                 HStack {
                     Text("Favorites")
                         .font(.headline)
-                   
                     Spacer()
                 }
                 .padding(.horizontal)
                 .padding(.vertical, 12)
-               
+
                 Divider()
-               
+
+                // MARK: - Empty state
                 if favManager.favorites.isEmpty {
                     VStack(spacing: 12) {
                         Image(systemName: "heart")
@@ -33,18 +35,29 @@ struct FavoritesScreen: View {
                     }
                     .padding()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+
                 } else {
+
+                    // MARK: - Favorites list
                     ScrollView {
                         VStack(spacing: 20) {
                             ForEach(favManager.favorites) { item in
                                 HStack(spacing: 14) {
-                                    Image(item.image)
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(width: 90, height: 90)
-                                        .background(Color(.systemGray6))
-                                        .cornerRadius(12)
- 
+
+                                    // ✅ IMAGE FROM BACKEND
+                                    RemoteImage(
+                                        imagePath: item.image,
+                                        aspectMode: .fill,
+                                        failure: AnyView(
+                                            Image("air-jordan1")
+                                                .resizable()
+                                                .scaledToFill()
+                                        )
+                                    )
+                                    .frame(width: 90, height: 90)
+                                    .background(Color(.systemGray6))
+                                    .cornerRadius(12)
+
                                     VStack(alignment: .leading, spacing: 4) {
                                         Text(item.title)
                                             .font(.headline)
@@ -52,14 +65,14 @@ struct FavoritesScreen: View {
                                         Text(item.subtitle)
                                             .font(.caption)
                                             .foregroundColor(.gray)
- 
+
                                         Text(item.price)
                                             .foregroundColor(.gray)
                                             .font(.subheadline)
                                     }
- 
+
                                     Spacer()
-                                   
+
                                     Button(action: {
                                         favManager.removeFavoriteItem(item)
                                     }) {
@@ -81,6 +94,7 @@ struct FavoritesScreen: View {
     }
 }
 
+// MARK: - Preview
 struct FavoritesScreen_Previews: PreviewProvider {
     static var previews: some View {
         FavoritesScreen()

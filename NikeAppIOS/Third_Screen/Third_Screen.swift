@@ -106,11 +106,9 @@ struct ThirdScreen: View {
             .padding()
             .background(Color(UIColor.systemGray5))
         }
-        // 👇 скрываем клавиатуру корректно
         .onTapGesture {
             isEmailFocused = false
         }
-        // 👇 автофокус при открытии экрана
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 isEmailFocused = true
