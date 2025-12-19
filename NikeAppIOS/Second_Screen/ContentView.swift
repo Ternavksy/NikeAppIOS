@@ -10,11 +10,16 @@ struct ContentView: View {
             Main_Screen()
         } else {
             ZStack {
-                Image("image_3")
-                    .resizable()
-                    .scaledToFill()
-                    .ignoresSafeArea()
-
+                RemoteImage(
+                    imagePath: "/images/image_3.png",
+                    aspectMode: .fill,
+                    failure: AnyView(
+                        Image("image_3")
+                            .resizable()
+                            .scaledToFill()
+                    )
+                )
+                .ignoresSafeArea()
                 LinearGradient(
                     gradient: Gradient(colors: [.black.opacity(0.2), .black.opacity(0.8)]),
                     startPoint: .top,
@@ -24,13 +29,19 @@ struct ContentView: View {
 
                 VStack {
                     Spacer()
-
                     HStack {
-                        Image("nike")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 300)
-                            .padding(.bottom, -40)
+                        RemoteImage(
+                            imagePath: "/images/nike.png",
+                            aspectMode: .fit,
+                            failure: AnyView(
+                                Image("nike")
+                                    .resizable()
+                                    .scaledToFit()
+                            )
+                        )
+                        .frame(width: 300)
+                        .padding(.bottom, -40)
+
                         Spacer()
                     }
                     .padding(.leading, -68)
@@ -53,6 +64,7 @@ struct ContentView: View {
                     .padding(.horizontal, 32)
                     .padding(.bottom, 40)
 
+                    // MARK: Buttons
                     HStack(spacing: 16) {
                         Button {
                             showForm = true
@@ -90,4 +102,8 @@ struct ContentView: View {
             }
         }
     }
+}
+
+#Preview {
+    ContentView()
 }

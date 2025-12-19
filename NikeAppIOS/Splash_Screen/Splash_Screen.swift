@@ -8,11 +8,17 @@ struct SplashScreen: View {
             Color.black
                 .ignoresSafeArea()
             
-            Image("nike")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 200)
-        }
+            RemoteImage(
+                imagePath: "/images/nike.png",
+                aspectMode: .fit,
+                failure: AnyView(
+                    Image("nike")
+                        .resizable()
+                        .scaledToFit()
+                )
+            )
+            .frame(width: 200)
+                    }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                 isActive = true

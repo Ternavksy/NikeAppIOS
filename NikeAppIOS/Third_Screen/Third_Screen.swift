@@ -7,14 +7,13 @@ struct ThirdScreen: View {
     @State private var showError: Bool = false
 
     @Binding var isLoggedIn: Bool
-    @FocusState private var focusedField: Field?
 
-    private enum Field: Hashable {
-        case email
-    }
+    @FocusState private var isEmailFocused: Bool
 
     var body: some View {
         VStack(spacing: 0) {
+
+            // MARK: Top bar
             HStack {
                 Button("Cancel") {
                     dismiss()
@@ -38,22 +37,28 @@ struct ThirdScreen: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
 
-                    Image("nike_black")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 160, height: 90)
-                        .padding(.leading, -30)
-                        .padding(.top, 20)
+                    // MARK: Logo (ВОЗВРАЩЕНО НА МЕСТО)
+                    RemoteImage(
+                        imagePath: "/images/nike_black.png",
+                        aspectMode: .fit,
+                        failure: AnyView(
+                            Image("nike_black")
+                                .resizable()
+                                .scaledToFit()
+                        )
+                    )
+                    .frame(width: 160, height: 90)
+                    .padding(.leading, -30)
+                    .padding(.top, 20)
 
                     Text("Enter your email to join\nus or sign in.")
                         .font(.system(size: 28, weight: .bold))
-                        .multilineTextAlignment(.leading)
 
                     HStack {
                         Text("United States")
                             .font(.subheadline)
 
-                        Button("Change") { }
+                        Button("Change") {}
                             .font(.subheadline)
                             .foregroundColor(.blue)
                     }
@@ -64,28 +69,28 @@ struct ThirdScreen: View {
                             .foregroundColor(.gray)
 
                         TextField("Email", text: $email)
+                            .focused($isEmailFocused)
                             .padding()
                             .background(
                                 RoundedRectangle(cornerRadius: 10)
-                                    .stroke(showError ? Color.red : Color.gray.opacity(0.4), lineWidth: 1)
+                                    .stroke(
+                                        showError ? Color.red : Color.gray.opacity(0.4),
+                                        lineWidth: 1
+                                    )
                             )
                             .keyboardType(.emailAddress)
                             .textContentType(.emailAddress)
-                            .autocapitalization(.none)
+                            .textInputAutocapitalization(.never)
                             .disableAutocorrection(true)
-                            .focused($focusedField, equals: .email)
                             .submitLabel(.done)
                             .onSubmit {
                                 validate()
                             }
-                            .onTapGesture {
-                                focusedField = .email
-                            }
 
                         if showError {
                             Text("Invalid email address")
-                                .foregroundColor(.red)
                                 .font(.caption)
+                                .foregroundColor(.red)
                         }
                     }
 
@@ -94,18 +99,21 @@ struct ThirdScreen: View {
                 .padding(.horizontal, 24)
             }
 
-            VStack {
-                Button("Done") {
-                    validate()
-                }
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color(UIColor.systemGray5))
+            Button("Done") {
+                validate()
             }
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(Color(UIColor.systemGray5))
         }
+        // 👇 скрываем клавиатуру корректно
+        .onTapGesture {
+            isEmailFocused = false
+        }
+        // 👇 автофокус при открытии экрана
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                focusedField = .email
+                isEmailFocused = true
             }
         }
     }
@@ -114,9 +122,9 @@ struct ThirdScreen: View {
         let lower = email.lowercased()
 
         let valid =
-            (lower.hasSuffix("@gmail.com") ||
-             lower.hasSuffix("@mail.ru") ||
-             lower.hasSuffix("@yandex.ru"))
+            lower.hasSuffix("@gmail.com") ||
+            lower.hasSuffix("@mail.ru") ||
+            lower.hasSuffix("@yandex.ru")
 
         if valid {
             showError = false
@@ -124,12 +132,7 @@ struct ThirdScreen: View {
             dismiss()
         } else {
             showError = true
+            isEmailFocused = true
         }
-    }
-}
-
-struct ThirdScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        ThirdScreen(isLoggedIn: .constant(false))
     }
 }

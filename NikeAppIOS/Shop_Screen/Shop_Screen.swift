@@ -15,6 +15,7 @@ struct ShopScreen: View {
                 Image(systemName: "house.fill")
                 Text("Home")
             }
+
             NavigationStack {
                 ShopContent()
             }
@@ -22,6 +23,7 @@ struct ShopScreen: View {
                 Image(systemName: "bag")
                 Text("Shop")
             }
+
             NavigationStack {
                 FavoritesScreen()
             }
@@ -29,6 +31,7 @@ struct ShopScreen: View {
                 Image(systemName: "heart")
                 Text("Favorites")
             }
+
             NavigationStack {
                 BagScreen()
             }
@@ -49,7 +52,7 @@ struct ShopScreen: View {
     }
 }
 
-// MARK: - Original ShopScreen content moved to ShopContent
+// MARK: - Shop Content
 struct ShopContent: View {
 
     @State private var selectedTab = 0
@@ -59,14 +62,16 @@ struct ShopContent: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 24) {
 
-                // MARK: - Tabs Men / Women / Kids
+                // MARK: Tabs
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 28) {
                         ForEach(tabs.indices, id: \.self) { index in
                             VStack {
                                 Text(tabs[index])
                                     .font(.system(size: 18, weight: .semibold))
-                                    .foregroundColor(selectedTab == index ? .black : .gray)
+                                    .foregroundColor(
+                                        selectedTab == index ? .black : .gray
+                                    )
 
                                 Rectangle()
                                     .fill(selectedTab == index ? .black : .clear)
@@ -82,7 +87,7 @@ struct ShopContent: View {
                     .padding(.top, 8)
                 }
 
-                // MARK: - Section 1
+                // MARK: Section 1
                 VStack(alignment: .leading, spacing: 12) {
 
                     Text("Must-Haves, Best Sellers & More")
@@ -90,54 +95,80 @@ struct ShopContent: View {
                         .padding(.horizontal)
 
                     HStack(spacing: 12) {
+
+                        // LEFT CARD
                         VStack(alignment: .leading, spacing: 8) {
                             NavigationLink(destination: Eight_Screen()) {
-                                Image("image 18")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: UIScreen.main.bounds.width/2 - 22, height: 200)
-                                    .clipped()
-                                    .cornerRadius(10)
+                                RemoteImage(
+                                    imagePath: "/images/image 18.png",
+                                    aspectMode: .fill,
+                                    height: 200,
+                                    failure: AnyView(
+                                        Image("image 18")
+                                            .resizable()
+                                            .scaledToFill()
+                                    )
+                                )
+                                .frame(
+                                    width: UIScreen.main.bounds.width / 2 - 22,
+                                    height: 200
+                                )
+                                .clipped()
+                                .cornerRadius(10)
                             }
                             .buttonStyle(PlainButtonStyle())
-                            
-                            NavigationLink(destination: Eight_Screen()) {
-                                Text("Best Sellers")
-                                    .font(.system(size: 14))
-                                    .foregroundColor(.gray)
-                            }
-                            .buttonStyle(PlainButtonStyle())
+
+                            Text("Best Sellers")
+                                .font(.system(size: 14))
+                                .foregroundColor(.gray)
                         }
+
+                        // RIGHT CARD
                         VStack(alignment: .leading, spacing: 8) {
                             NavigationLink(destination: Eight_Screen()) {
-                                Image("image 19")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: UIScreen.main.bounds.width/2 - 22, height: 200)
-                                    .clipped()
-                                    .cornerRadius(10)
+                                RemoteImage(
+                                    imagePath: "/images/image 19.png",
+                                    aspectMode: .fill,
+                                    height: 200,
+                                    failure: AnyView(
+                                        Image("image 19")
+                                            .resizable()
+                                            .scaledToFill()
+                                    )
+                                )
+                                .frame(
+                                    width: UIScreen.main.bounds.width / 2 - 22,
+                                    height: 200
+                                )
+                                .clipped()
+                                .cornerRadius(10)
                             }
                             .buttonStyle(PlainButtonStyle())
-                            
-                            NavigationLink(destination: Eight_Screen()) {
-                                Text("Featured in Nike Air")
-                                    .font(.system(size: 14))
-                                    .foregroundColor(.gray)
-                            }
-                            .buttonStyle(PlainButtonStyle())
+
+                            Text("Featured in Nike Air")
+                                .font(.system(size: 14))
+                                .foregroundColor(.gray)
                         }
                     }
                     .padding(.horizontal)
                 }
 
-                // MARK: - Section 2
+                // MARK: Section 2
                 VStack(alignment: .leading, spacing: 12) {
                     ZStack(alignment: .bottomLeading) {
-                        Image("nikeee")
-                            .resizable()
-                            .frame(width: 335, height: 111)
-                            .clipped()
-                            .cornerRadius(10)
+                        RemoteImage(
+                            imagePath: "/images/nikeee.png",
+                            aspectMode: .fill,
+                            height: 111,
+                            failure: AnyView(
+                                Image("nikeee")
+                                    .resizable()
+                                    .scaledToFill()
+                            )
+                        )
+                        .frame(width: 335, height: 111)
+                        .clipped()
+                        .cornerRadius(10)
 
                         Text("New & Featured")
                             .font(.system(size: 22, weight: .bold))
@@ -147,14 +178,22 @@ struct ShopContent: View {
                     .padding(.horizontal)
                 }
 
-                // MARK: - Section 3
+                // MARK: Section 3
                 VStack(alignment: .leading, spacing: 12) {
                     ZStack(alignment: .bottomLeading) {
-                        Image("pacani")
-                            .resizable()
-                            .frame(width: 335, height: 111)
-                            .clipped()
-                            .cornerRadius(10)
+                        RemoteImage(
+                            imagePath: "/images/pacani.png",
+                            aspectMode: .fill,
+                            height: 111,
+                            failure: AnyView(
+                                Image("pacani")
+                                    .resizable()
+                                    .scaledToFill()
+                            )
+                        )
+                        .frame(width: 335, height: 111)
+                        .clipped()
+                        .cornerRadius(10)
 
                         Text("Shoes")
                             .font(.system(size: 22, weight: .bold))
@@ -181,12 +220,10 @@ struct ShopContent: View {
     }
 }
 
-// MARK: - Previews
+// MARK: - Preview
 struct ShopScreen_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            ShopScreen()
-                .previewDevice("iPhone 14 Pro")
-        }
+        ShopScreen()
+            .previewDevice("iPhone 14 Pro")
     }
 }
