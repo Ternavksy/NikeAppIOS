@@ -119,7 +119,7 @@ UI всегда обновляется в главном потоке, что с
 
 ## 🛠 Используемые технологии
 
-* Swift 5
+* Swift
 * SwiftUI
 * MVVM
 * Combine (через `ObservableObject`)
